@@ -1,0 +1,37 @@
+.md-header {
+  position: sticky;
+  top: min(0px, calc(60px - 100vw / 6));
+  background-image: url('../assets/header-bg.jpg');
+  background-size: cover;
+  background-position: flex-start;
+  height: auto;
+  aspect-ratio: 6 / 1; 
+  z-index: 10;
+}
+
+.md-tabs {
+  top: 48px !important;
+}
+
+.md-header__inner {
+  height: 100%;
+  align-items: flex-end;
+}
+
+@media screen and (min-width: 76.25em) {
+  .md-sidebar {
+    position: sticky !important;
+    top: 144px !important;
+    height: calc(100vh - 144px) !important;
+  }
+}
+
+.md-main {
+  margin-top: 48px !important;
+}
+
+@media screen and (max-width: 76.25em) {
+  .md-header {
+    top: 0px;
+  }
+}
