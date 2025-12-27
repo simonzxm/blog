@@ -1,5 +1,6 @@
 site_name: XM Zheng's Blog
 site_url: https://xmzheng.cn/
+copyright: Copyright &copy; 2025 XM Zheng
 
 extra_css:
   - stylesheets/extra.css
@@ -25,6 +26,7 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.expand
+    - navigation.footer
     - toc.integrate
 
 plugins:

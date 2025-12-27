@@ -13,10 +13,6 @@
   align-items: flex-end;
 }
 
-.md-tabs {
-  top: 48px !important;
-}
-
 .md-main {
   margin-top: 72px !important;
 }
@@ -59,4 +55,11 @@
 .md-post--excerpt:hover {
     border: 2px solid var(--post-border-color);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.md-content img {
+    max-height: 300px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 0.8rem;
 }
