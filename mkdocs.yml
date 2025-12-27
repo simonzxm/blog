@@ -39,3 +39,8 @@ plugins:
       post_excerpt_separator: <!-- more -->
   - search
   - social
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
