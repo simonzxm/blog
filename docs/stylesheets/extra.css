@@ -19,10 +19,11 @@
 
 @media screen and (min-width: 76.25em) {
   .md-sidebar {
-    position: sticky !important;
     top: 144px !important;
-    height: 80vh !important; 
-    will-change: transform;
+  }
+  .md-sidebar__scrollwrap {
+    height: auto !important;
+    max-height: calc(100vh - 360px);
   }
 }
 
