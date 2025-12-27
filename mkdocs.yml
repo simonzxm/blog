@@ -24,6 +24,8 @@ theme:
   features:
     - navigation.tabs
     - navigation.tabs.sticky
+    - navigation.expand
+    - toc.integrate
 
 plugins:
   - blog:
