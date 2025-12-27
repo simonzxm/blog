@@ -7,6 +7,7 @@ extra_css:
 
 theme:
   name: material
+  custom_dir: overrides
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -27,6 +28,8 @@ theme:
     - navigation.tabs.sticky
     - navigation.expand
     - navigation.footer
+    - search.suggest
+    - search.highlight
     - toc.integrate
 
 plugins:
@@ -37,6 +40,7 @@ plugins:
       pagination_per_page: 5
       post_excerpt: optional
       post_excerpt_separator: <!-- more -->
+  - meta
   - search
   - social
 
