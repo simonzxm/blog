@@ -1,6 +1,7 @@
 ---
 date: 2025-08-26
 categories: [Studying]
+cover: ../assets/covers/organized-notes-of-mit-1801sc.png
 ---
 
 # Organized notes of MIT 18.01SC

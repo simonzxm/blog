@@ -1,6 +1,7 @@
 ---
 date: 2025-12-26
 categories: [Living]
+cover: ../assets/covers/welcome-to-my-new-blog.jpg
 ---
 
 # Welcome to my new blog!
