@@ -42,3 +42,28 @@
     top: 0px;
   }
 }
+
+[data-md-color-scheme=default] {
+    --post-card-bg: lavender;
+    --post-border-color: navy;
+}
+
+[data-md-color-scheme=slate] {
+    --post-card-bg: black;
+    --post-border-color: gold;
+}
+
+.md-post--excerpt {
+    background-color: var(--post-card-bg);
+    padding: 1.5rem;
+    border-radius: 0.8rem;
+    border: 2px solid transparent;
+    transition: 
+        border-color 0.3s ease, 
+        box-shadow 0.3s ease;
+}
+
+.md-post--excerpt:hover {
+    border: 2px solid var(--post-border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
