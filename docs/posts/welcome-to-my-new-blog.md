@@ -1,8 +1,11 @@
 ---
 date: 2025-12-26
+categories: [Living]
 ---
 
 # Welcome to my new blog!
+
+![](../assets/covers/welcome-to-my-new-blog.jpg)
 
 把博客迁移到 Material for Mkdocs 上啦
 
