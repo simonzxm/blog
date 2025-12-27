@@ -1,24 +1,16 @@
 .md-header {
   position: sticky;
-  top: min(0px, calc(60px - 100vw / 6));
-  background-image: url('../assets/header-bg.jpg');
+  top: -500px;
+  height: 560px;
+  background-image: url('../assets/header-bg.webp');
   background-size: cover;
   background-position: top;
-  height: auto;
-  aspect-ratio: 6 / 1; 
+  will-change: transform;
 }
 
 .md-header__inner {
   height: 100%;
   align-items: flex-end;
-}
-
-.md-header--shadow {
-  transition: transform 0.25s cubic-bezier(0.1, 0.7, 0.1, 1), box-shadow 0.25s;
-}
-
-.md-header__topic {
-  transition: transform 0.25s cubic-bezier(0.1, 0.7, 0.1, 1), box-shadow 0.25s;
 }
 
 .md-tabs {
@@ -33,13 +25,15 @@
   .md-sidebar {
     position: sticky !important;
     top: 144px !important;
-    height: calc(100vh - 144px) !important;
+    height: 80vh !important; 
+    will-change: transform;
   }
 }
 
 @media screen and (max-width: 76.25em) {
   .md-header {
-    top: 0px;
+    top: -300px;
+    height: 360px;
   }
 }
 
@@ -58,9 +52,8 @@
     padding: 1.5rem;
     border-radius: 0.8rem;
     border: 2px solid transparent;
-    transition: 
-        border-color 0.3s ease, 
-        box-shadow 0.3s ease;
+    contain: layout style;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .md-post--excerpt:hover {
