@@ -2,9 +2,6 @@ site_name: XM Zheng's Blog
 site_url: https://xmzheng.cn/
 copyright: Copyright &copy; 2025 XM Zheng
 
-extra_css:
-  - stylesheets/extra.css
-
 theme:
   name: material
   custom_dir: overrides
@@ -55,6 +52,8 @@ plugins:
 
 markdown_extensions:
   - admonition
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.blocks.details
   - pymdownx.details
   - pymdownx.highlight:
@@ -62,3 +61,10 @@ markdown_extensions:
       line_spans: __span
   - pymdownx.inlinehilite
   - pymdownx.superfences
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
