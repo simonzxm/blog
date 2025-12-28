@@ -35,32 +35,50 @@
 }
 
 [data-md-color-scheme=default] {
-    --post-card-bg: lavender;
-    --post-border-color: navy;
+  --post-card-bg: lavender;
+  --post-border-color: navy;
 }
 
 [data-md-color-scheme=slate] {
-    --post-card-bg: black;
-    --post-border-color: gold;
+  --post-card-bg: black;
+  --post-border-color: gold;
 }
 
 .md-post--excerpt {
-    background-color: var(--post-card-bg);
-    padding: 1.5rem;
-    border-radius: 0.8rem;
-    border: 2px solid transparent;
-    contain: layout style;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--post-card-bg);
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+  border: 2px solid transparent;
+  contain: layout style;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .md-post--excerpt:hover {
-    border: 2px solid var(--post-border-color);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border: 2px solid var(--post-border-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .md-content img {
-    max-height: 300px;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 0.8rem;
+  max-height: 300px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0.8rem;
+}
+
+details .linenos, details code, details .filename{
+  font-size: inherit !important;
+}
+
+details > summary + .highlight, details > summary + .tabbed-set {
+  margin: -0.6rem !important;
+}
+
+.md-typeset .admonition.plain > .admonition-title,
+.md-typeset details.plain > summary {
+  padding-left: 0.8rem;
+}
+
+.md-typeset .admonition.plain > .admonition-title::before,
+.md-typeset details.plain > summary::before {
+  display: none;
 }
