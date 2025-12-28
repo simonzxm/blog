@@ -61,6 +61,8 @@ markdown_extensions:
       line_spans: __span
   - pymdownx.inlinehilite
   - pymdownx.superfences
+  - toc:
+      permalink: true
 
 extra_css:
   - stylesheets/extra.css
