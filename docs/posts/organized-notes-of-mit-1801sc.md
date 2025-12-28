@@ -1,6 +1,6 @@
 ---
 date: 2025-08-26
-categories: [Studying]
+categories: [Studying, Math]
 slug: organized-notes-of-mit-1801sc
 cover: ../assets/covers/organized-notes-of-mit-1801sc.png
 ---

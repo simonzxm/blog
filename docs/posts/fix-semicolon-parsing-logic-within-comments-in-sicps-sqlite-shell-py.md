@@ -1,6 +1,6 @@
 ---
 date: 2025-12-28
-categories: [Studying]
+categories: [Studying, SICP]
 slug: fix-semicolon-parsing-logic-within-comments-in-sicps-sqlite-shell-py
 ---
 
