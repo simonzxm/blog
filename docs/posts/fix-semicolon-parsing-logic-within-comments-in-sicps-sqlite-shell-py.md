@@ -1,6 +1,7 @@
 ---
 date: 2025-12-28
 categories: [Studying]
+slug: fix-semicolon-parsing-logic-within-comments-in-sicps-sqlite-shell-py
 ---
 
 # Fix semicolon parsing logic within comments in SICP's `sqlite_shell.py`
@@ -9,7 +10,7 @@ SICP 的 `sqlite_shell.py` 非常神奇的无法处理 `/* */` 中的 `;`，会�
 
 ```bash
 sqlite> /*;*/;
-near "*": syntax error
+near "*": syntax errornear "*": syntax errornear "*": syntax errornear "*": syntax errornear "*": syntax errornear "*": syntax errornear "*": syntax errornear "*": syntax errornear "*": syntax errornear "*": syntax errornear "*": syntax errornear "*": syntax errornear "*": syntax errornear "*": syntax error
 ```
 
 <!-- more -->
