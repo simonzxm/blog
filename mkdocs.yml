@@ -57,7 +57,6 @@ markdown_extensions:
   - pymdownx.blocks.details
   - pymdownx.details
   - pymdownx.highlight:
-      linenums_style: pymdownx-inline
       line_spans: __span
   - pymdownx.inlinehilite
   - pymdownx.superfences
