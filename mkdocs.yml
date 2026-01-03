@@ -60,6 +60,8 @@ markdown_extensions:
       line_spans: __span
   - pymdownx.inlinehilite
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
   - toc:
       permalink: true
 
