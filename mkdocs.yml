@@ -1,6 +1,6 @@
 site_name: XM Zheng's Blog
 site_url: https://xmzheng.cn/
-copyright: Copyright &copy; 2025 XM Zheng
+copyright: Copyright &copy; 2025-2026 XM Zheng
 
 theme:
   name: material
@@ -54,14 +54,20 @@ markdown_extensions:
   - admonition
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.blocks.admonition
   - pymdownx.blocks.details
+  - pymdownx.caret
+  - pymdownx.critic
   - pymdownx.details
   - pymdownx.highlight:
       line_spans: __span
   - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.tilde
   - toc:
       permalink: true
 
