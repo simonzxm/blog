@@ -4,7 +4,10 @@ window.MathJax = {
     displayMath: [["$$", "$$"], ["\\[", "\\]"]],
     processEscapes: true,
     processEnvironments: true,
-    packages: {'[+]': ['ams', 'extpfeil']}
+    packages: {'[+]': ['ams', 'extpfeil']},
+    macros: {
+      d: "{\\mathop{}\\!\\mathrm{d}}"
+    }
   },
   loader: {
     load: ['[tex]/ams', '[tex]/extpfeil']
