@@ -82,3 +82,22 @@ details > summary + .highlight, details > summary + .tabbed-set {
 .md-typeset details.plain > summary::before {
   display: none;
 }
+
+.pyodide {
+  border: .075rem solid var(--md-primary-fg-color);
+  border-radius: .2rem;
+}
+
+.pyodide-editor {
+  font-family: 'Noto Sans Mono';
+}
+
+.pyodide-editor-bar {
+  font-size: .7rem;
+  padding: 5px 0 5px;
+}
+
+.pyodide-editor-bar .twemoji {
+  vertical-align: text-bottom;
+  margin-bottom: .05rem;
+}
