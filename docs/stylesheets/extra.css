@@ -65,7 +65,7 @@
   border-radius: 0.8rem;
 }
 
-details .linenos, details code, details .filename{
+details .linenos, details code, details .filename, details .pyodide-editor {
   font-size: inherit !important;
 }
 
@@ -100,4 +100,9 @@ details > summary + .highlight, details > summary + .tabbed-set {
 .pyodide-editor-bar .twemoji {
   vertical-align: text-bottom;
   margin-bottom: .05rem;
+}
+
+details > .pyodide {
+  margin: -0.6rem !important;
+  border: none;
 }
