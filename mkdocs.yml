@@ -44,6 +44,7 @@ plugins:
       post_excerpt: optional
       post_excerpt_separator: <!-- more -->
       post_url_format: "posts/{slug}"
+  - glightbox
   - markdown-exec
   - meta
   - search
