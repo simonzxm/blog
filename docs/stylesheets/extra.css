@@ -1,7 +1,7 @@
 .md-header {
   position: sticky;
-  top: -500px;
-  height: 560px;
+  top: -200px;
+  height: 260px;
   background-image: url('../assets/header-bg.webp');
   background-size: cover;
   background-position: top;
