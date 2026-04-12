@@ -1,0 +1,1146 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://xmzheng.cn/posts/some-questions-i-set/">
+      
+      
+        <link rel="prev" href="../the-fall-of-my-freshman-year/">
+      
+      
+        <link rel="next" href="../from-hash-tables-to-dictionaries-the-missing-part-of-sicp/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Some questions I set - XM Zheng's Blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+  
+  
+    
+  
+  
+  <style>:root{}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,300i,400,400i,700,700i%7CNoto+Sans+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Noto Sans";--md-code-font:"Noto Sans Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+<meta property="og:type" content="website">
+<meta property="og:title" content="Some questions I set - XM Zheng's Blog">
+<meta property="og:image" content="https://xmzheng.cn/assets/images/social/posts/some-questions-i-set.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://xmzheng.cn/posts/some-questions-i-set/">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="Some questions I set - XM Zheng's Blog">
+<meta property="twitter:image" content="https://xmzheng.cn/assets/images/social/posts/some-questions-i-set.png">
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#some-questions-i-set" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="XM Zheng's Blog" class="md-header__button md-logo" aria-label="XM Zheng's Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            XM Zheng's Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Some questions I set
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../archive/2026/" class="md-tabs__link">
+          
+  
+  
+  Archive
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../category/dlco/" class="md-tabs__link">
+          
+  
+  
+  Categories
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden="">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="XM Zheng's Blog" class="md-nav__button md-logo" aria-label="XM Zheng's Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    XM Zheng's Blog
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archive
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2026/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2025/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/dlco/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DLCO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/living/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Living
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/sicp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SICP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/studying/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Studying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../.." class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"></path></svg>
+                        <time datetime="2026-01-17 00:00:00+00:00" class="md-ellipsis">January 17, 2026</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"></path></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../category/studying/">Studying</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"></path></svg>
+                          <span class="md-ellipsis">
+                            
+                              4 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+            
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#math" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Math
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chemistry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chemistry
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+
+
+<h1 id="some-questions-i-set">Some questions I set<a class="headerlink" href="#some-questions-i-set" title="Permanent link">¶</a></h1>
+<p>是一些很乱的一个整理，从家里翻出来的一堆东西。没什么用。</p>
+<p>只是觉得弃之可惜。</p>
+<!-- more -->
+
+<h2 id="math">Math<a class="headerlink" href="#math" title="Permanent link">¶</a></h2>
+<details>
+<summary>Problem 1</summary>
+<p>古埃及习惯用多个分子为 <span class="arithmatex">\(1\)</span>，分母不同的分数来表示任意分数。对于正整数 <span class="arithmatex">\(p,q\)</span> 满足 <span class="arithmatex">\(p&lt;q\)</span>，若 <span class="arithmatex">\(\dfrac pq=\displaystyle\sum_{k=1}^n\frac1{a_k}\)</span>（<span class="arithmatex">\(a_k\)</span> 为互不相等的正整数），则称 <span class="arithmatex">\(\displaystyle\sum_{k=1}^n\frac1{a_k}\)</span> 为 <span class="arithmatex">\(\dfrac pq\)</span> 的一个“ <span class="arithmatex">\(k\)</span> -单位分数表示”，例如：<span class="arithmatex">\(\dfrac3{10}\)</span> 的一个 “ <span class="arithmatex">\(3\)</span> -单位分数表示”为 <span class="arithmatex">\(\dfrac15+\dfrac1{15}+\dfrac1{30}\)</span>。回答下列问题：</p>
+<p>(1) 写出 <span class="arithmatex">\(\dfrac16\)</span> 的两种“ <span class="arithmatex">\(3\)</span> -单位分数表示”</p>
+<p>(2) 求证：对任意的正整数 <span class="arithmatex">\(a\ge2\)</span>，<span class="arithmatex">\(\dfrac1a\)</span> 均存在一种“ <span class="arithmatex">\(k\)</span> -单位分数表示”，其中 <span class="arithmatex">\(k\)</span> 可取任意正整数。</p>
+<p>(3) 已知正整数 <span class="arithmatex">\(\lambda\)</span> 满足 <span class="arithmatex">\(0\le\lambda\le n\)</span>。若从 <span class="arithmatex">\(\{1,2,\cdots,3^n-1\}\)</span> 中任选一个数 <span class="arithmatex">\(b\)</span>（选中每个数的概率相同），记 <span class="arithmatex">\(\dfrac b{3^n}\)</span> 存在“ <span class="arithmatex">\(3\lambda\)</span> -单位分数表示”的概率为 <span class="arithmatex">\(p\)</span>，求证：</p>
+<div class="arithmatex">\[p&gt;\dfrac{(\lambda+1)^2}{3^n-1}\]</div>
+</details>
+<details>
+<summary>Problem 2</summary>
+<p>实数 <span class="arithmatex">\(x,y,z,a,b,c\)</span> 满足</p>
+<div class="arithmatex">\[x+y+z=\frac1a+\frac1b+\frac1c=0\]</div>
+<div class="arithmatex">\[x^2+y^2+z^2=6-3\sqrt3\]</div>
+<p>求</p>
+<div class="arithmatex">\[S=(x-a+1)^2+(y-b+1)^2+(z-c+1)^2\]</div>
+<p>的最小值</p>
+</details>
+<details>
+<summary>Problem Set 1</summary>
+<p>对于 <span class="arithmatex">\(n\in N^{\ast }\)</span> ，我们把小于 <span class="arithmatex">\(n\)</span> 的正整数中与 <span class="arithmatex">\(n\)</span> 的最小公倍数为 <span class="arithmatex">\(1\)</span> 的数的个数记为 <span class="arithmatex">\(\varphi (n)\)</span> ，例如 <span class="arithmatex">\(\varphi (5)=4\)</span> </p>
+<p>(1) 求 <span class="arithmatex">\(\varphi \left( 3^{n}\right) ,\varphi \left( 4^{n}\right)\)</span> </p>
+<hr>
+<p>已知数列 <span class="arithmatex">\(\{a_{n}\}\)</span> 的前 <span class="arithmatex">\(n\)</span> 项和为 <span class="arithmatex">\(S_{n}\)</span> ，数列 <span class="arithmatex">\(\{b_{n}\}\)</span> 的前 <span class="arithmatex">\(n\)</span> 项和为 <span class="arithmatex">\(T_{n}\)</span> </p>
+<p>(1) 若 <span class="arithmatex">\(a_{n}=n\left( n+3\right)\cdot2^{n}\)</span> ，求 <span class="arithmatex">\(S_{n}\)</span> </p>
+<p>(2) 在(1)的条件下，若 <span class="arithmatex">\(b_{n}=\dfrac {n^{2}+2n+2}{S_{n}}\)</span> ，求 <span class="arithmatex">\(T_{n}\)</span> </p>
+<hr>
+<p>已知数列 <span class="arithmatex">\(\{a_{n}\}\)</span> 满足 <span class="arithmatex">\(a_{n}=2n-1\)</span> ，且 <span class="arithmatex">\(\forall n\in N^{\ast }, S_{n}=\dfrac {\sin a_{1}x}{a_{1}}+\dfrac {\sin a_{2}x}{a_{2}}+\cdots+\dfrac {\sin a_{n}x}{a_{n}}\geq 0\)</span> ，求 <span class="arithmatex">\(x\)</span> 的取值范围</p>
+<hr>
+<p>已知数列 <span class="arithmatex">\(\{a_{n}\}\)</span> 满足 <span class="arithmatex">\(a_{n}=1,a_{n+1}=a^{2}_{n}-\left( n+1\right) a_{n}+1\)</span> </p>
+<p>(1) 求 <span class="arithmatex">\(\{a_{n}\}\)</span> 的通项公式</p>
+<p>(2) 若 <span class="arithmatex">\(b_{n}=\dfrac {3n+5}{\left( a^{2}_{n}-1\right) a_{n}}\)</span> ，数列 <span class="arithmatex">\(\{b_{n}\}\)</span> 的前 <span class="arithmatex">\(n\)</span> 项和为 <span class="arithmatex">\(T_{n}\)</span> ，求证： <span class="arithmatex">\(T_{n} &lt; \dfrac {5}{6}\)</span> </p>
+<hr>
+<p>数学上常用 <span class="arithmatex">\(\prod\limits ^{n}_{i=1}a_{i}\)</span> 表示 <span class="arithmatex">\(a_{1},a_{2},\cdots,a_{n}\)</span> 的乘积， <span class="arithmatex">\(\prod\limits ^{n}_{i=1}a_{i}=a_{1}\cdot a_{2}\cdots a_{n},n\in N^{\ast }\)</span> </p>
+<p>(1) 证明： <span class="arithmatex">\(\prod\limits ^{n}_{i=1}\dfrac {2i}{2i-1} &gt; \sqrt {2n+1}\)</span> </p>
+<p>(2) 数列 <span class="arithmatex">\(a_{n},b_{n}\)</span> 满足 <span class="arithmatex">\(a_{n}=n,b_{n}=\dfrac{a_{1}^{2}\cdot a_{3}^{2}\cdots a_{2n-1}^{2}}{(2n)!}\)</span> ，证明： <span class="arithmatex">\(\sum\limits ^{n}_{i=1}b_{i} &lt; \sqrt {2n+1}-1\)</span> </p>
+<hr>
+<p>已知数列 <span class="arithmatex">\(\{a_{n}\}\)</span> 的前 <span class="arithmatex">\(n\)</span> 项和为 <span class="arithmatex">\(S_{n}\)</span> ，且满足 <span class="arithmatex">\(a_{1}=1,a_{n+1}-a_{n}=f(a_{n})\)</span> </p>
+<p>(1) 若 <span class="arithmatex">\(f\left( x\right) =\dfrac {x\sqrt {x}\left( 1-x\right) }{\left( \sqrt {x}-1\right) ^{3}}\)</span> ，求证： <span class="arithmatex">\(\dfrac {3}{2} &lt; S_{2024} &lt; \dfrac {5}{2}\)</span> </p>
+<p>(2) 若 <span class="arithmatex">\(f\left( x\right) =-\dfrac {1}{3}x^{2}\)</span> ，求证： <span class="arithmatex">\(\dfrac {5}{2} &lt; 100a_{100} &lt; 3\)</span> </p>
+<hr>
+<p>已知数列 <span class="arithmatex">\(\{a_{n}\}\)</span> 的前 <span class="arithmatex">\(n\)</span> 项和为 <span class="arithmatex">\(S_{n}\)</span> ，且满足 <span class="arithmatex">\(a_{1}=1\)</span> ， <span class="arithmatex">\(a_{n+1}=2e^{a_{n}}+a_{n}\)</span> </p>
+<p>(1) 证明： <span class="arithmatex">\(S_{n}\geq 3^{n}-n-1\)</span> </p>
+<p>(2) 证明： <span class="arithmatex">\(( 1+\dfrac {1}{5a^{2}_{2}}) ( 1+\dfrac {1}{5a^{2}_{3}})\cdots(1+\dfrac{1}{5a^{2}_{n}})&lt;\sqrt[3]{e}\)</span> </p>
+</details>
+<h2 id="chemistry">Chemistry<a class="headerlink" href="#chemistry" title="Permanent link">¶</a></h2>
+<details>
+<summary>Problem 1</summary>
+<p>下列说法正确的是</p>
+<p>A. 中碳钢强度高，可用于制作地铁列车的车体</p>
+<p>B. 铬酸作氧化剂可使铝制品的氧化膜产生美丽的颜色</p>
+<p>C. 考古研究中常利用 <span class="arithmatex">\(^{14}\mathrm C\)</span> 和 <span class="arithmatex">\(^{15}\mathrm N\)</span> 的测定来分析古代人类的食物结构</p>
+<p>D. 如果不慎将酸沾到皮肤上，应立即用大量水冲洗，然后涂上 <span class="arithmatex">\(3\%-5\%\,\mathrm{NaHCO}_3\)</span> 溶液</p>
+</details>
+<details>
+<summary>Problem Set 1</summary>
+<p>以下材料一定不能用于制作钻头或轴承的是</p>
+<p>A. <span class="arithmatex">\(Al_{2}O_{3}\)</span></p>
+<p>B. <span class="arithmatex">\(Cr\)</span></p>
+<p>C. <span class="arithmatex">\(Pt\)</span></p>
+<p>D. <span class="arithmatex">\(Si_{3}N_{4}\)</span></p>
+<hr>
+<p>类比推理是化学中常用的思维方法，下列说法正确的是</p>
+<p>A. 常温下甲醇不能与新制 <span class="arithmatex">\(Cu(OH)_{2}\)</span> 溶液反应，则常温下甘油也不能与新制 <span class="arithmatex">\(Cu(OH)_{2}\)</span> 溶液反应</p>
+<p>B. 硫酸钡不能与硫酸反应，则磷酸钡也不能与磷酸反应</p>
+<p>C. <span class="arithmatex">\(NaCl\)</span> 与浓硫酸共热能制取 <span class="arithmatex">\(HCl\)</span> ，则 <span class="arithmatex">\(NaI\)</span> 与浓硫酸共热也能制取 <span class="arithmatex">\(HI\)</span></p>
+<p>D. 灼烧 <span class="arithmatex">\(NaNO_{3}\)</span> 不能生成单质 <span class="arithmatex">\(Na\)</span> ，则灼烧 <span class="arithmatex">\(Cu(NO_{3})_{2}\)</span> 也不能生成单质 <span class="arithmatex">\(Cu\)</span></p>
+<hr>
+<p>硼是一种重要的化工原料，硼制品广泛应用于化工、冶金、光学玻璃、医药、橡胶及轻工业。请回答下列问题：</p>
+<p>I 工业上硼的冶炼流程：</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/posts/some-questions-i-set/chemistry-ps1-1.jpeg" data-desc-position="bottom"><img alt="" src="../../assets/posts/some-questions-i-set/chemistry-ps1-1.jpeg"></a></p>
+<p>(1) 流程中第一步涉及反应的化学方程式为</p>
+<p>(2) 制备单质B过程中易生成含硼杂质，该杂质的化学式是</p>
+<p>II 硼存在多种含氧酸</p>
+<p>(3) 写出正硼酸 <span class="arithmatex">\(H_{3}BO_{3}\)</span> 在水中的电离方程式；该反应 <span class="arithmatex">\(K=10^{-9.34}\)</span> ，取 <span class="arithmatex">\(50mL\)</span> 正硼酸溶液加入一定量甘露醇 <span class="arithmatex">\(C_{6}H_{14}O_{6}\)</span> 后用 <span class="arithmatex">\(0.1000mol/LNaOH\)</span> 标准溶液滴定并用pH计实时测定溶液pH。甘露醇的作用是</p>
+<p>(4) 下图为一种硼酸的晶体结构，该硼酸的分子式是</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/posts/some-questions-i-set/chemistry-ps1-2.jpeg" data-desc-position="bottom"><img alt="" src="../../assets/posts/some-questions-i-set/chemistry-ps1-2.jpeg"></a></p>
+<p>(5) <span class="arithmatex">\(NaBH_{2}O_{4}\)</span> 受热不易分解，是一种温和的氧化剂，在潮湿热空气中分解放氧，也可用作织物漂白剂。<span class="arithmatex">\(NaBH_{2}O_{4}\)</span> 中有两种不同化学环境的氧原子，则阴离子的结构式为</p>
+<p>III 硼可以形成一系列氢化物，它们性质类似于烷烃，所以被称作硼烷</p>
+<p>(6) 最简单的硼烷是乙硼烷 <span class="arithmatex">\(B_{2}H_{6}\)</span> ，结构与 <span class="arithmatex">\(AlCl_{3}\)</span> 二聚体类似。写出 <span class="arithmatex">\(B_{2}H_{6}\)</span> 的结构式</p>
+<p>(7) 科学家至今没有发现 <span class="arithmatex">\(BH_{3}\)</span> 的存在，但存在稳定的 <span class="arithmatex">\(BF_{3}\)</span> 。写出可能的原因</p>
+<hr>
+<p>以甲醛和苯酚为主要原料，经下图所示系列转化可合成酚醛树脂和重要有机合成中间体D。部分反应条件和产物略去，回答下列问题：</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/posts/some-questions-i-set/chemistry-ps1-3.jpeg" data-desc-position="bottom"><img alt="" src="../../assets/posts/some-questions-i-set/chemistry-ps1-3.jpeg"></a></p>
+<p>(1) 用系统命名法命名A的单体； <span class="arithmatex">\(HCHO\)</span> 过量时生成的A难溶于水，原因是</p>
+<p>(2) C中所含官能团的名称是</p>
+<p>(3) 写出生成 <span class="arithmatex">\(PhOCH_{3}\)</span> 的反应方程式； <span class="arithmatex">\(K_{2}CO_{3}\)</span> 的作用是</p>
+<p>(4) B的同分异构体中，含苯环的共有___种（不含立体异构）</p>
+<p>(5) D与氢气完全加成后产物的一氯代物最多有___种手性异构体</p>
+<p>(6) 写出以 <span class="arithmatex">\(CH_{3}OH\)</span> 为原料（无机试剂任选）制备化合物 <span class="arithmatex">\(CH_{3}COCH_{2}COOCH_{3}\)</span> 的合成路线</p>
+</details>
+<details>
+<summary>Exam 1</summary>
+<p>Video: <a href="https://www.bilibili.com/video/BV1Da411D7Br">https://www.bilibili.com/video/BV1Da411D7Br</a></p>
+<p>Download: <a href="https://wwb.lanzouy.com/ixljS07s9hpc">https://wwb.lanzouy.com/ixljS07s9hpc</a></p>
+<p>Errata:</p>
+<p>12.</p>
+<p>II取I中所得滤液加入少量X溶液，此时溶液颜色为紫色；再加入过量Ba(OH)2溶液，过滤，所得滤液的颜色为蓝色。</p>
+<p>IV取II中所得滤液加入过量稀硝酸和少量Y溶液，产生白色沉淀；过滤。</p>
+<p>（3）IV中所得滤液的颜色为________。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+  <h2 id="__comments">Comments</h2>
+  <!-- Insert generated snippet here -->
+  <script src="https://giscus.app/client.js" data-repo="simonzxm/giscus" data-repo-id="R_kgDOQvtcKQ" data-category="Announcements" data-category-id="DIC_kwDOQvtcKc4C0Sa-" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async="">
+  </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    // Set palette on initial load
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate"
+        ? "transparent_dark"
+        : "light"
+
+      // Instruct Giscus to set theme
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    // Register event handlers after documented loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate"
+            ? "transparent_dark"
+            : "light"
+
+          // Instruct Giscus to change theme
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+        
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../the-fall-of-my-freshman-year/" class="md-footer__link md-footer__link--prev" aria-label="Previous: The fall of my freshman year">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                The fall of my freshman year
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../from-hash-tables-to-dictionaries-the-missing-part-of-sicp/" class="md-footer__link md-footer__link--next" aria-label="Next: From hash tables to dictionaries: the missing part of SICP">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                From hash tables to dictionaries: the missing part of SICP
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2025-2026 XM Zheng
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand", "navigation.footer", "search.suggest", "search.highlight", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../assets/_markdown_exec_pyodide.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/busuanzi.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
