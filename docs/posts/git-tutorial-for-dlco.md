@@ -120,3 +120,21 @@ git push nju sync:sync
     ```bash
     git checkout master
     ```
+
+## 如果你的平台是 EduCoder (头歌)
+
+如果在头歌上的话，会简单很多
+
+```bash
+cd /data/workspace/myshixun
+git remote -v
+```
+
+然后你就得到了仓库地址，`push` `pull` 时用头歌的账号密码登录即可。
+
+!!! warning
+    进行所有修改后，一定要切回 `master` 分支，否则评测时仓库可能出现异常
+
+    ```bash
+    git checkout master
+    ```
