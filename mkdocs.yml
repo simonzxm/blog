@@ -47,6 +47,12 @@ plugins:
   - glightbox
   - markdown-exec
   - meta
+  - rss:
+      match_path: posts/.* 
+      date_from_meta:
+        as_creation: date
+      categories:
+        - categories
   - search
   - social:
       cards_layout_options:

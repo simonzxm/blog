@@ -1,3 +1,4 @@
 mkdocs-material[imaging]
 markdown-exec
 mkdocs-glightbox
+mkdocs-rss-plugin
