@@ -2,7 +2,7 @@
 date: 2026-01-17
 categories: [Studying, Review]
 slug: the-fall-of-my-freshman-year
-cover: ../assets/covers/the-fall-of-my-freshman-year.jpg
+cover: ../assets/covers/the-fall-of-my-freshman-year.jpeg
 ---
 
 # The fall of my freshman year
