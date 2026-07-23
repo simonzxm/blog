@@ -32,6 +32,14 @@
   display: none;
 }
 
+.md-post--excerpt {
+  margin-bottom: 1rem;
+}
+
+.md-post--excerpt h2 {
+  margin: 1em 0 .64em;
+}
+
 details .linenos, details code, details .filename, details .pyodide-editor {
   font-size: inherit !important;
 }
