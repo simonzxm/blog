@@ -89,7 +89,7 @@ details > summary + .highlight, details > summary + .tabbed-set {
 }
 
 .pyodide-editor {
-  font-family: 'Noto Sans Mono';
+  font-family: 'Roboto Mono';
 }
 
 .pyodide-editor-bar {
