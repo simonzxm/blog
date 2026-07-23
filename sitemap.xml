@@ -13,6 +13,10 @@
          <lastmod>2026-07-23</lastmod>
     </url>
     <url>
+         <loc>https://blog.xmzheng.cn/posts/a-glance-at-proxmox-ve/</loc>
+         <lastmod>2026-07-23</lastmod>
+    </url>
+    <url>
          <loc>https://blog.xmzheng.cn/posts/fix-semicolon-parsing-logic-within-comments-in-sicps-sqlite-shell-py/</loc>
          <lastmod>2026-07-23</lastmod>
     </url>
@@ -81,15 +85,19 @@
          <lastmod>2026-07-23</lastmod>
     </url>
     <url>
+         <loc>https://blog.xmzheng.cn/category/review/</loc>
+         <lastmod>2026-07-23</lastmod>
+    </url>
+    <url>
+         <loc>https://blog.xmzheng.cn/category/linux/</loc>
+         <lastmod>2026-07-23</lastmod>
+    </url>
+    <url>
          <loc>https://blog.xmzheng.cn/category/studying/</loc>
          <lastmod>2026-07-23</lastmod>
     </url>
     <url>
          <loc>https://blog.xmzheng.cn/category/sicp/</loc>
-         <lastmod>2026-07-23</lastmod>
-    </url>
-    <url>
-         <loc>https://blog.xmzheng.cn/category/review/</loc>
          <lastmod>2026-07-23</lastmod>
     </url>
     <url>
