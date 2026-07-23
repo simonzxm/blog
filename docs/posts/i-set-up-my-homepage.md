@@ -7,6 +7,8 @@ cover: ../assets/covers/i-set-up-my-homepage.png
 
 # I set up my homepage!
 
+<!-- more -->
+
 正好有一个闲置的域名不知道拿来干啥好，有人建议我搞个个人主页。
 
 所以就有啦，这个简陋的主页：

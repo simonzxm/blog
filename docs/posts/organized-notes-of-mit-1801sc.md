@@ -11,6 +11,8 @@ cover: ../assets/covers/organized-notes-of-mit-1801sc.png
 
 An archive of MIT 18.01SC Single Variable Calculus Fall 2010 with organized notes, problem sets and exams.
 
+<!-- more -->
+
 ### Download Links:
 
 - GitHub: <https://github.com/simonzxm/MIT-18.01SC-Fall-2010>

@@ -10,6 +10,8 @@ slug: from-hash-tables-to-dictionaries-the-missing-part-of-sicp
 > 
 > 我们的 [SICP](https://sicp.pascal-lab.net/2025/) 课程没有涉及这一数据结构，我相信也有其他学习者想要深入了解字典的实现原理；因此我不妨写一份讲义，来系统地讲解 Python 字典的设计思想，希望后来者也能少走一些弯路。
 
+<!-- more -->
+
 !!! note
     这份讲义不适合以下读者：
 
@@ -17,8 +19,6 @@ slug: from-hash-tables-to-dictionaries-the-missing-part-of-sicp
     - 期望以此提高课内成绩。
     
     建议在阅读后完成配套练习。
-
-<!-- more -->
 
 ## Table of Scores
 

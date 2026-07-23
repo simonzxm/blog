@@ -9,6 +9,8 @@ cover: ../assets/covers/welcome-to-my-new-blog.jpg
 
 把博客迁移到 Material for Mkdocs 上啦
 
+<!-- more -->
+
 应该会看起来正经一点（？然后可能会尝试一些自定义的 CSS，也许会比较好看吧。
 
 !!! failure "Cry.."
