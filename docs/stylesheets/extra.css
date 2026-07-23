@@ -1,8 +1,35 @@
+.md-cover {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.4rem;
+}
+
 .md-cover img {
+  display: block;
   max-height: 300px;
   width: 100%;
   object-fit: cover;
-  border-radius: 0.4rem;
+}
+
+.md-cover__title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: calc(100% - 2rem);
+  margin: 0 !important;
+  padding: 0.4em 0.75em;
+  transform: translate(-50%, -50%);
+  border-radius: 0.2rem;
+  background: rgb(255 255 255 / 70%);
+  color: #000 !important;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.md-cover + h1 {
+  display: none;
 }
 
 details .linenos, details code, details .filename, details .pyodide-editor {

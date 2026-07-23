@@ -1,5 +1,6 @@
-{%if page.meta.cover %}
+{% if page.meta.cover %}
   <div class="md-cover">
-    <img src="{{ page.meta.cover | url }}" alt="{{ page.title }}">
+    <img src="{{ page.meta.cover | url }}" alt="">
+    <h1 class="md-cover__title">{{ page.title | d(config.site_name, true) }}</h1>
   </div>
 {% endif %}

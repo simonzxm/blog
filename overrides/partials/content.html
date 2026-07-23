@@ -1,6 +1,6 @@
 {% include "partials/tags.html" %}
 {% include "partials/actions.html" %}
-{% if "\u003ch1" not in page.content %}
+{% if "\u003ch1" not in page.content and not page.meta.cover %}
   <h1>{{ page.title | d(config.site_name, true)}}</h1>
 {% endif %}
 {% include "partials/cover.html" %}
