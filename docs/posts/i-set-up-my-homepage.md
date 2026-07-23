@@ -1,6 +1,6 @@
 ---
 date: 2025-12-27
-categories: [Living]
+categories: [Living, Web]
 slug: i-set-up-my-homepage
 cover: ../assets/covers/i-set-up-my-homepage.png
 ---

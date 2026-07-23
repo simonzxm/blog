@@ -1,6 +1,6 @@
 ---
 date: 2026-01-06
-categories: [Studying]
+categories: [Studying, Web]
 slug: how-to-build-a-pastebin-website
 cover: ../assets/covers/how-to-build-a-pastebin-website.png
 ---
