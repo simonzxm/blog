@@ -7,8 +7,6 @@ slug: how-to-build-a-pastebin-website
 
 # How to build a pastebin website
 
-![](../assets/covers/how-to-build-a-pastebin-website.png)
-
 近日给原来的 Pastebin 换了一个服务器，重新部署一遍，正好写一篇教程。
 
 我选择的是 [PrivateBin](https://privatebin.info/)。

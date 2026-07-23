@@ -7,8 +7,6 @@ cover: ../assets/covers/the-fall-of-my-freshman-year.jpeg
 
 # The fall of my freshman year
 
-![](../assets/covers/the-fall-of-my-freshman-year.jpeg)
-
 一个普通的 Review。会慢慢更新。
 
 <!-- more -->
