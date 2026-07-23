@@ -1,8 +1,8 @@
-.md-content img {
+.md-cover img {
   max-height: 300px;
   width: 100%;
   object-fit: cover;
-  border-radius: 0.8rem;
+  border-radius: 0.4rem;
 }
 
 details .linenos, details code, details .filename, details .pyodide-editor {
