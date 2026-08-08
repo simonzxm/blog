@@ -11,7 +11,7 @@ slug: something-about-vivado-and-verilog
 
     开发板：Nexys A7-100T
 
-    项目仓库：<https://github.com/simonzxm/dlco-exp>
+    项目仓库：<https://github.com/nju-cs-2025-xmzheng/nju-dlco-exp-2026-spring>
 
 <!-- more -->
 
@@ -24,6 +24,7 @@ Vivado 是一个包含 GUI 的 IDE，但是我自己感觉非常难用，界面�
 所以在此我分享一下我使用的环境配置。
 
 ### 在 Mac 上配置 Icarus Verilog 和 GTKWave
+
 主要是，你不可能一直到其他地方去跑这个程序来验证正确性，所以我们需要一个能编译的东西，他可以帮你验证程序是否能编译，部分帮你判断程序是否正确。
 
 ```bash
@@ -32,13 +33,13 @@ brew install icarus-verilog
 
 接下来安装 GTKWave，这个是通过看波形图来判断程序的输出是否正确。（不过我还不太会怎么看这个）
 
-可以直接在 repo 看到安装教程：[https://github.com/gtkwave/gtkwave](https://github.com/gtkwave/gtkwave)
+可以直接在 repo 看到安装教程：<https://github.com/gtkwave/gtkwave>
 
 由于 Mac 的接口很少，并且也没法装大型的软件用于烧录，我们接下来在另一台电脑上配置好 Vivado。
 
 ### 在 ArchLinux 上配置 Vivado
 
-首先下载`.tar.gz`的安装包，解压在某个位置。
+首先下载 `.tar.gz` 的安装包，解压在某个位置。
 
 我安装的是 2020.2 版本（课程推荐版本），可能需要进行一些环境的调整。
 
@@ -54,7 +55,7 @@ sudo pacman -S libxcrypt-compat
 ./xsetup -b ConfigGen
 ```
 
-编辑配置文件`~/.Xilinx/install_config.txt`后，直接在命令行安装
+编辑配置文件 `~/.Xilinx/install_config.txt` 后，直接在命令行安装
 
 ```bash
 sudo ./xsetup --agree 3rdPartyEULA,WebTalkTerms,XilinxEULA --batch Install --config ~/.Xilinx/install_config.txt
@@ -74,13 +75,14 @@ cd /opt/Xilinx/Vivado/2020.2/data/xicom/cable_drivers/lin64/install_script/insta
 sudo ./install_drivers
 ```
 
-然后需要在`.bashrc`或者`.bash_profile`加一个`source`
+启动可能稍微麻烦一点（CLI 环境下），没办法直接 `vivado`，需要先
 
 ```bash
-echo 'source /opt/Xilinx/Vivado/2020.2/settings64.sh' >> ~/.bashrc
+source /opt/Xilinx/Vivado/2020.2/settings64.sh
 ```
 
-接下来可以打开试试了。
+然后才可以找到 `vivado`。注意这里不建议直接写在 `.bashrc` 里，Vivado 自带了一个 gcc，可能会导致一些问题。
+当然，你可以写一个函数来方便自己。
 
 如果打开后显示为全白窗口，可以在打开前
 
@@ -88,7 +90,7 @@ echo 'source /opt/Xilinx/Vivado/2020.2/settings64.sh' >> ~/.bashrc
 export _JAVA_AWT_WM_NONREPARENTING=1
 ```
 
-当然，这个也可以加在你的`.bashrc`里面。
+这个应该可以加在你的 `.bashrc` 里面。
 
 ## 通过 Make 进行编译和烧录
 
@@ -150,7 +152,7 @@ close_hw_manager
 ```
 ///
 
-每次写的时候需要写一个`top.v`文件。约束文件我使用的是`nexysa7.xdc`。
+每次写的时候需要写一个 `top.v` 文件。约束文件我使用的是 `nexysa7.xdc`。
 
 有些地方可以根据自己的需求进行修改一下。
 
@@ -172,7 +174,7 @@ make prog
 make clean
 ```
 
-由于我懒得在不同平台编译（他们输出的文件是互相兼容的），我在`.gitignore`里面没有加`.bit`文件，可以参考：
+由于我懒得在不同平台编译（他们输出的文件是互相兼容的），我在 `.gitignore` 里面没有加 `.bit` 文件，可以参考：
 
 /// details | .gitignore
     type: plain
@@ -184,3 +186,5 @@ make clean
 *.xml
 ```
 ///
+
+（不过你可能会在以后发现他会输出更多的奇怪文件）
