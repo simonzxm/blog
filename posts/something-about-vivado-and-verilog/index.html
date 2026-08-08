@@ -975,7 +975,7 @@
 <p class="admonition-title">Info</p>
 <p>课程名称：数字逻辑与计算机组成实验</p>
 <p>开发板：Nexys A7-100T</p>
-<p>项目仓库：<a href="https://github.com/simonzxm/dlco-exp">https://github.com/simonzxm/dlco-exp</a></p>
+<p>项目仓库：<a href="https://github.com/nju-cs-2025-xmzheng/nju-dlco-exp-2026-spring">https://github.com/nju-cs-2025-xmzheng/nju-dlco-exp-2026-spring</a></p>
 </div>
 <!-- more -->
 
@@ -991,7 +991,7 @@
 <p>可以直接在 repo 看到安装教程：<a href="https://github.com/gtkwave/gtkwave">https://github.com/gtkwave/gtkwave</a></p>
 <p>由于 Mac 的接口很少，并且也没法装大型的软件用于烧录，我们接下来在另一台电脑上配置好 Vivado。</p>
 <h3 id="在-archlinux-上配置-vivado">在 ArchLinux 上配置 Vivado<a class="headerlink" href="#在-archlinux-上配置-vivado" title="Permanent link">¶</a></h3>
-<p>首先下载<code>.tar.gz</code>的安装包，解压在某个位置。</p>
+<p>首先下载 <code>.tar.gz</code> 的安装包，解压在某个位置。</p>
 <p>我安装的是 2020.2 版本（课程推荐版本），可能需要进行一些环境的调整。</p>
 <div class="highlight"><pre><span></span><code><span id="__span-1-1">sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>libxcrypt-compat
 </span></code></pre></div>
@@ -999,7 +999,7 @@
 <p>首先生成配置文件</p>
 <div class="highlight"><pre><span></span><code><span id="__span-2-1">./xsetup<span class="w"> </span>-b<span class="w"> </span>ConfigGen
 </span></code></pre></div>
-<p>编辑配置文件<code>~/.Xilinx/install_config.txt</code>后，直接在命令行安装</p>
+<p>编辑配置文件 <code>~/.Xilinx/install_config.txt</code> 后，直接在命令行安装</p>
 <div class="highlight"><pre><span></span><code><span id="__span-3-1">sudo<span class="w"> </span>./xsetup<span class="w"> </span>--agree<span class="w"> </span>3rdPartyEULA,WebTalkTerms,XilinxEULA<span class="w"> </span>--batch<span class="w"> </span>Install<span class="w"> </span>--config<span class="w"> </span>~/.Xilinx/install_config.txt
 </span></code></pre></div>
 <p>我第一次使用 GUI 安装的时候卡住了，后来也不知道出现了什么问题，最好只好全部重新安装。</p>
@@ -1011,14 +1011,15 @@
 </span><span id="__span-4-4"><span class="c1"># 以 root 权限运行驱动安装脚本</span>
 </span><span id="__span-4-5">sudo<span class="w"> </span>./install_drivers
 </span></code></pre></div>
-<p>然后需要在<code>.bashrc</code>或者<code>.bash_profile</code>加一个<code>source</code></p>
-<div class="highlight"><pre><span></span><code><span id="__span-5-1"><span class="nb">echo</span><span class="w"> </span><span class="s1">'source /opt/Xilinx/Vivado/2020.2/settings64.sh'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+<p>启动可能稍微麻烦一点（CLI 环境下），没办法直接 <code>vivado</code>，需要先</p>
+<div class="highlight"><pre><span></span><code><span id="__span-5-1"><span class="nb">source</span><span class="w"> </span>/opt/Xilinx/Vivado/2020.2/settings64.sh
 </span></code></pre></div>
-<p>接下来可以打开试试了。</p>
+<p>然后才可以找到 <code>vivado</code>。注意这里不建议直接写在 <code>.bashrc</code> 里，Vivado 自带了一个 gcc，可能会导致一些问题。
+当然，你可以写一个函数来方便自己。</p>
 <p>如果打开后显示为全白窗口，可以在打开前</p>
 <div class="highlight"><pre><span></span><code><span id="__span-6-1"><span class="nb">export</span><span class="w"> </span><span class="nv">_JAVA_AWT_WM_NONREPARENTING</span><span class="o">=</span><span class="m">1</span>
 </span></code></pre></div>
-<p>当然，这个也可以加在你的<code>.bashrc</code>里面。</p>
+<p>这个应该可以加在你的 <code>.bashrc</code> 里面。</p>
 <h2 id="通过-make-进行编译和烧录">通过 Make 进行编译和烧录<a class="headerlink" href="#通过-make-进行编译和烧录" title="Permanent link">¶</a></h2>
 <p>可以直接抄我的 Makefile（</p>
 <details class="plain">
@@ -1070,7 +1071,7 @@
 </span><span id="__span-9-7"><span class="nv">close_hw_manager</span>
 </span></code></pre></div>
 </details>
-<p>每次写的时候需要写一个<code>top.v</code>文件。约束文件我使用的是<code>nexysa7.xdc</code>。</p>
+<p>每次写的时候需要写一个 <code>top.v</code> 文件。约束文件我使用的是 <code>nexysa7.xdc</code>。</p>
 <p>有些地方可以根据自己的需求进行修改一下。</p>
 <p>写完了以后可以直接</p>
 <div class="highlight"><pre><span></span><code><span id="__span-10-1">make
@@ -1081,7 +1082,7 @@
 <p>如果需要清理工作目录，直接</p>
 <div class="highlight"><pre><span></span><code><span id="__span-12-1">make<span class="w"> </span>clean
 </span></code></pre></div>
-<p>由于我懒得在不同平台编译（他们输出的文件是互相兼容的），我在<code>.gitignore</code>里面没有加<code>.bit</code>文件，可以参考：</p>
+<p>由于我懒得在不同平台编译（他们输出的文件是互相兼容的），我在 <code>.gitignore</code> 里面没有加 <code>.bit</code> 文件，可以参考：</p>
 <details class="plain">
 <summary>.gitignore</summary>
 <div class="highlight"><pre><span></span><code><span id="__span-13-1">.Xil/
@@ -1091,6 +1092,7 @@
 </span><span id="__span-13-5">*.xml
 </span></code></pre></div>
 </details>
+<p>（不过你可能会在以后发现他会输出更多的奇怪文件）</p>
 
 
 
