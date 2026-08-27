@@ -44,6 +44,20 @@
   font-weight: 400;
 }
 
+@media screen and (max-width: 600px) {
+  .md-content__inner > h1,
+  .md-cover__title {
+    font-size: 1.35rem !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .md-content__inner > h1,
+  .md-cover__title {
+    font-size: 1.2rem !important;
+  }
+}
+
 .md-tabs__item--active .md-tabs__link {
   font-weight: 700;
 }
