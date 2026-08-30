@@ -40,6 +40,30 @@
   margin: 1em 0 .64em;
 }
 
+.md-post--archive {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding: 0.45em 0;
+}
+
+.md-post--archive time {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.md-post--archive-title {
+  min-width: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--md-typeset-a-color);
+}
+
+.md-post--archive-title:hover {
+  color: var(--md-accent-fg-color);
+}
+
 .md-typeset h1, .md-typeset h2 {
   font-weight: 400;
 }

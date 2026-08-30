@@ -1,3 +1,16 @@
+{% if page.url.startswith("archive/") %}
+<article class="md-post md-post--archive">
+  <time datetime="{{ post.config.date.created.strftime('%Y-%m-%d') }}">
+    {{- post.config.date.created.strftime("%m-%d") -}}
+  </time>
+  <a href="{{ post.url | url }}" class="md-post--archive-title">
+    {{- post.post.title -}}
+  </a>
+  {% if post.config.draft %}
+    <span class="md-draft">{{ lang.t("blog.draft") }}</span>
+  {% endif %}
+</article>
+{% else %}
 <article class="md-post md-post--excerpt">
   <div class="md-post__content md-typeset">
     <hr>
@@ -54,3 +67,4 @@
     </div>
   </header>
 </article>
+{% endif %}
