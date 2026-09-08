@@ -1,0 +1,1803 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://blog.xmzheng.cn/posts/migrate-to-layer-3-traffic-routing/">
+      
+      
+        <link rel="prev" href="../listen-to-apple-music-lossless-on-archlinux/">
+      
+      
+      
+        
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Migrate to layer 3 traffic routing - XM Zheng's Blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+  
+  
+    
+  
+  
+  <style>:root{}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+<meta property="og:type" content="website">
+<meta property="og:title" content="Migrate to layer 3 traffic routing - XM Zheng's Blog">
+<meta property="og:image" content="https://blog.xmzheng.cn/assets/images/social/posts/migrate-to-layer-3-traffic-routing.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://blog.xmzheng.cn/posts/migrate-to-layer-3-traffic-routing/">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="Migrate to layer 3 traffic routing - XM Zheng's Blog">
+<meta property="twitter:image" content="https://blog.xmzheng.cn/assets/images/social/posts/migrate-to-layer-3-traffic-routing.png">
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#配置-easytier-组网" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="XM Zheng's Blog" class="md-header__button md-logo" aria-label="XM Zheng's Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            XM Zheng's Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Migrate to layer 3 traffic routing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="purple" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="yellow" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../archive/2026/" class="md-tabs__link">
+          
+  
+  
+  Archive
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../category/dlco/" class="md-tabs__link">
+          
+  
+  
+  Categories
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden="">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="XM Zheng's Blog" class="md-nav__button md-logo" aria-label="XM Zheng's Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    XM Zheng's Blog
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archive
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2026/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2025/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/dlco/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DLCO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/living/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Living
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/sicp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SICP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/studying/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Studying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../.." class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"></path></svg>
+                        <time datetime="2026-09-08 00:00:00+00:00" class="md-ellipsis">September 8, 2026</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"></path></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../category/linux/">Linux</a>, 
+                              <a href="../../category/web/">Web</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"></path></svg>
+                          <span class="md-ellipsis">
+                            
+                              8 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+            
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#配置-easytier-组网" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配置 Easytier 组网
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#建立-gre-l3-隧道" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        建立 GRE L3 隧道
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="建立 GRE L3 隧道">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#本机侧router" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本机侧（Router）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#海外侧hk-vps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        海外侧（HK VPS）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#配置海外侧-nftables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配置海外侧 nftables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#配置本机-nftables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配置本机 nftables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#配置-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配置 DNS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#最后" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最后
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+
+
+  <h1>Migrate to layer 3 traffic routing</h1>
+
+
+<p>近来突然不想用应用层代理（Mihomo）了；恰逢要做计网的实验，不能一直开着这样的代理，那我便换一个方案。</p>
+<!-- more -->
+
+<p>由于我的代理节点全部是自建的，我可以随便选择协议；所以便有了这个方案：</p>
+<p>我们可以先用组网工具（比如我这里用的 Easytier）建立连接，然后在这个网络里面跑 GRE 隧道，这样我们就先在我们的电脑和海外的机器之间建立了一条可以被视为网络层的通道了，可以直接通过这个隧道来传输经过组网工具加密后的裸数据包；接着，我们可以使用 nftables 针对 IP 进行内核级的分流，同样直接传输原始的数据包，这样就差不多做完了。</p>
+<p>最后的结果差不多是这样的，我们可以让所有连接电脑热点的设备（现在这个电脑可以被称为软路由了）顺利进行 traceroute 等操作，就像这样</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/posts/migrate-to-layer-3-traffic-routing/traceroute.png" data-desc-position="bottom"><img alt="" src="../../assets/posts/migrate-to-layer-3-traffic-routing/traceroute.png"></a></p>
+<h2 id="配置-easytier-组网">配置 Easytier 组网<a class="headerlink" href="#配置-easytier-组网" title="Permanent link">¶</a></h2>
+<p>这里就不多说了；由于我们后续在用 nftables 进行分流的时候需要绕开 Easytier 的流量，所以我们需要在配置最后加一个小的 flag</p>
+<div class="highlight"><pre><span></span><code><span id="__span-0-1"><span class="k">[flag]</span>
+</span><span id="__span-0-2"><span class="n">socket_mark</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">131072</span>
+</span></code></pre></div>
+<p>也就是 <code>0x20000</code>；这样我们就可以很方便的排除掉不应该分流的流量。</p>
+<p>最后，我将以这样的网络进行后续的操作（已省略无关内容）</p>
+<details class="plain">
+<summary>Easytier Peer</summary>
+<div class="highlight"><pre><span></span><code><span id="__span-1-1">$<span class="w"> </span>easytier-cli<span class="w"> </span>peer
+</span><span id="__span-1-2"><span class="p">|</span><span class="w"> </span>ipv4<span class="w">              </span><span class="p">|</span><span class="w"> </span>hostname<span class="w">        </span><span class="p">|</span><span class="w"> </span>cost<span class="w">     </span><span class="p">|</span><span class="w"> </span>lat<span class="o">(</span>ms<span class="o">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>loss<span class="w"> </span><span class="p">|</span>
+</span><span id="__span-1-3"><span class="p">|</span>-------------------<span class="p">|</span>-----------------<span class="p">|</span>----------<span class="p">|</span>---------<span class="p">|</span>------<span class="p">|</span>
+</span><span id="__span-1-4"><span class="p">|</span><span class="w"> </span><span class="m">100</span>.100.100.2/24<span class="w">  </span><span class="p">|</span><span class="w"> </span>archlinux<span class="w">       </span><span class="p">|</span><span class="w"> </span>Local<span class="w">    </span><span class="p">|</span><span class="w"> </span>-<span class="w">       </span><span class="p">|</span><span class="w"> </span>-<span class="w">    </span><span class="p">|</span>
+</span><span id="__span-1-5"><span class="p">|</span><span class="w"> </span><span class="m">100</span>.100.100.11/24<span class="w"> </span><span class="p">|</span><span class="w"> </span>zouter-hk<span class="w">       </span><span class="p">|</span><span class="w"> </span>p2p<span class="w">      </span><span class="p">|</span><span class="w"> </span><span class="m">63</span>.09<span class="w">   </span><span class="p">|</span><span class="w"> </span><span class="m">0</span>.0%<span class="w"> </span><span class="p">|</span>
+</span></code></pre></div>
+</details>
+<h2 id="建立-gre-l3-隧道">建立 GRE L3 隧道<a class="headerlink" href="#建立-gre-l3-隧道" title="Permanent link">¶</a></h2>
+<p>我们大概的配置是这样的</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Easytier</th>
+<th>GRE</th>
+<th>GRE Interface</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Router</strong></td>
+<td>100.100.100.2</td>
+<td>10.200.0.2/30</td>
+<td>gre-hk</td>
+</tr>
+<tr>
+<td><strong>HK VPS</strong></td>
+<td>100.100.100.11</td>
+<td>10.200.0.1/30</td>
+<td>gre-router</td>
+</tr>
+</tbody>
+</table>
+<p>先加载 GRE 内核模块</p>
+<div class="highlight"><pre><span></span><code><span id="__span-2-1">sudo<span class="w"> </span>modprobe<span class="w"> </span>ip_gre
+</span><span id="__span-2-2"><span class="nb">echo</span><span class="w"> </span><span class="s2">"ip_gre"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/modules-load.d/gre.conf
+</span></code></pre></div>
+<p>然后我们先在本机做好配置</p>
+<h3 id="本机侧router">本机侧（Router）<a class="headerlink" href="#本机侧router" title="Permanent link">¶</a></h3>
+<details class="plain">
+<summary><code>/etc/l3-router/router.conf</code></summary>
+<div class="highlight"><pre><span></span><code><span id="__span-3-1"><span class="na">ET_LOCAL</span><span class="o">=</span><span class="s">100.100.100.2</span>
+</span><span id="__span-3-2"><span class="na">ET_REMOTE</span><span class="o">=</span><span class="s">100.100.100.11</span>
+</span><span id="__span-3-3">
+</span><span id="__span-3-4"><span class="na">GRE_LOCAL</span><span class="o">=</span><span class="s">10.200.0.2</span>
+</span><span id="__span-3-5"><span class="na">GRE_PEER</span><span class="o">=</span><span class="s">10.200.0.1</span>
+</span><span id="__span-3-6"><span class="na">GRE_PREFIX</span><span class="o">=</span><span class="s">30</span>
+</span><span id="__span-3-7"><span class="na">GRE_MTU</span><span class="o">=</span><span class="s">1280</span>
+</span><span id="__span-3-8">
+</span><span id="__span-3-9"><span class="na">ROUTE_TABLE</span><span class="o">=</span><span class="s">100</span>
+</span><span id="__span-3-10">
+</span><span id="__span-3-11"><span class="na">ROUTE_MARK</span><span class="o">=</span><span class="s">0x10000</span>
+</span><span id="__span-3-12"><span class="na">ROUTE_MARK_MASK</span><span class="o">=</span><span class="s">0x10000</span>
+</span><span id="__span-3-13">
+</span><span id="__span-3-14"><span class="na">DIRECT_MARK</span><span class="o">=</span><span class="s">0x20000</span>
+</span><span id="__span-3-15"><span class="na">DIRECT_MARK_MASK</span><span class="o">=</span><span class="s">0x20000</span>
+</span></code></pre></div>
+</details>
+<p>然后开启 IPv4 Forwarding</p>
+<details class="plain">
+<summary><code>/etc/sysctl.d/80-l3-router.conf</code></summary>
+<div class="highlight"><pre><span></span><code><span id="__span-4-1"><span class="na">net.ipv4.ip_forward</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+</span><span id="__span-4-2"><span class="na">net.ipv4.conf.all.rp_filter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2</span>
+</span><span id="__span-4-3"><span class="na">net.ipv4.conf.default.rp_filter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2</span>
+</span></code></pre></div>
+</details>
+<div class="highlight"><pre><span></span><code><span id="__span-5-1">sudo<span class="w"> </span>sysctl<span class="w"> </span>--system
+</span></code></pre></div>
+<p>然后创建一个 bash 脚本来管理网络接口</p>
+<details class="plain">
+<summary><code>/usr/local/sbin/l3-router-gre</code></summary>
+<div class="highlight"><pre><span></span><code><span id="__span-6-1"><span class="ch">#!/bin/sh</span>
+</span><span id="__span-6-2"><span class="nb">set</span><span class="w"> </span>-eu
+</span><span id="__span-6-3">
+</span><span id="__span-6-4">.<span class="w"> </span>/etc/l3-router/router.conf
+</span><span id="__span-6-5">
+</span><span id="__span-6-6"><span class="c1"># 等待 Easytier Peer 可达</span>
+</span><span id="__span-6-7"><span class="k">until</span><span class="w"> </span>ip<span class="w"> </span>-4<span class="w"> </span>route<span class="w"> </span>get<span class="w"> </span><span class="s2">"</span><span class="nv">$DIRECT_REMOTE</span><span class="s2">"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">"src </span><span class="nv">$DIRECT_LOCAL</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+</span><span id="__span-6-8"><span class="w">    </span>sleep<span class="w"> </span><span class="m">1</span>
+</span><span id="__span-6-9"><span class="k">done</span>
+</span><span id="__span-6-10">
+</span><span id="__span-6-11">ip<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span>gre-hk<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ip<span class="w"> </span>tunnel<span class="w"> </span>del<span class="w"> </span>gre-hk
+</span><span id="__span-6-12">
+</span><span id="__span-6-13">ip<span class="w"> </span>tunnel<span class="w"> </span>add<span class="w"> </span>gre-hk<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-14"><span class="w">    </span>mode<span class="w"> </span>gre<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-15"><span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="s2">"</span><span class="nv">$DIRECT_LOCAL</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-16"><span class="w">    </span>remote<span class="w"> </span><span class="s2">"</span><span class="nv">$DIRECT_REMOTE</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-17"><span class="w">    </span>ttl<span class="w"> </span><span class="m">64</span>
+</span><span id="__span-6-18">
+</span><span id="__span-6-19">ip<span class="w"> </span>addr<span class="w"> </span>replace<span class="w"> </span><span class="s2">"</span><span class="nv">$GRE_LOCAL</span><span class="s2">/</span><span class="nv">$GRE_PREFIX</span><span class="s2">"</span><span class="w"> </span>dev<span class="w"> </span>gre-hk
+</span><span id="__span-6-20">ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>gre-hk<span class="w"> </span>mtu<span class="w"> </span><span class="s2">"</span><span class="nv">$GRE_MTU</span><span class="s2">"</span>
+</span><span id="__span-6-21">ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>gre-hk<span class="w"> </span>up
+</span><span id="__span-6-22">
+</span><span id="__span-6-23">ip<span class="w"> </span>route<span class="w"> </span>replace<span class="w"> </span>default<span class="w"> </span>dev<span class="w"> </span>gre-hk<span class="w"> </span>table<span class="w"> </span><span class="s2">"</span><span class="nv">$ROUTE_TABLE</span><span class="s2">"</span>
+</span><span id="__span-6-24">
+</span><span id="__span-6-25">ip<span class="w"> </span>rule<span class="w"> </span>del<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-26"><span class="w">    </span>priority<span class="w"> </span><span class="m">9000</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-27"><span class="w">    </span>fwmark<span class="w"> </span><span class="s2">"</span><span class="nv">$DIRECT_MARK</span><span class="s2">/</span><span class="nv">$DIRECT_MARK_MASK</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-28"><span class="w">    </span>table<span class="w"> </span>main<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-6-29">
+</span><span id="__span-6-30">ip<span class="w"> </span>rule<span class="w"> </span>del<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-31"><span class="w">    </span>priority<span class="w"> </span><span class="m">10000</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-32"><span class="w">    </span>fwmark<span class="w"> </span><span class="s2">"</span><span class="nv">$ROUTE_MARK</span><span class="s2">/</span><span class="nv">$ROUTE_MARK_MASK</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-33"><span class="w">    </span>table<span class="w"> </span><span class="s2">"</span><span class="nv">$ROUTE_TABLE</span><span class="s2">"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-6-34">
+</span><span id="__span-6-35">ip<span class="w"> </span>rule<span class="w"> </span>add<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-36"><span class="w">    </span>priority<span class="w"> </span><span class="m">9000</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-37"><span class="w">    </span>fwmark<span class="w"> </span><span class="s2">"</span><span class="nv">$DIRECT_MARK</span><span class="s2">/</span><span class="nv">$DIRECT_MARK_MASK</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-38"><span class="w">    </span>table<span class="w"> </span>main
+</span><span id="__span-6-39">
+</span><span id="__span-6-40">ip<span class="w"> </span>rule<span class="w"> </span>add<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-41"><span class="w">    </span>priority<span class="w"> </span><span class="m">10000</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-42"><span class="w">    </span>fwmark<span class="w"> </span><span class="s2">"</span><span class="nv">$ROUTE_MARK</span><span class="s2">/</span><span class="nv">$ROUTE_MARK_MASK</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-43"><span class="w">    </span>table<span class="w"> </span><span class="s2">"</span><span class="nv">$ROUTE_TABLE</span><span class="s2">"</span>
+</span></code></pre></div>
+</details>
+<div class="highlight"><pre><span></span><code><span id="__span-7-1">sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/sbin/l3-router-gre
+</span></code></pre></div>
+<p>再使用 <code>systemd</code> 来管理这个脚本</p>
+<details class="plain">
+<summary><code>/etc/systemd/system/l3-router-gre.service</code></summary>
+<div class="highlight"><pre><span></span><code><span id="__span-8-1"><span class="k">[Unit]</span>
+</span><span id="__span-8-2"><span class="na">Description</span><span class="o">=</span><span class="s">L3 GRE tunnel over EasyTier</span>
+</span><span id="__span-8-3"><span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span>
+</span><span id="__span-8-4"><span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span>
+</span><span id="__span-8-5">
+</span><span id="__span-8-6"><span class="k">[Service]</span>
+</span><span id="__span-8-7"><span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
+</span><span id="__span-8-8"><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/sbin/l3-router-gre</span>
+</span><span id="__span-8-9"><span class="na">RemainAfterExit</span><span class="o">=</span><span class="s">yes</span>
+</span><span id="__span-8-10"><span class="na">TimeoutStartSec</span><span class="o">=</span><span class="s">0</span>
+</span><span id="__span-8-11">
+</span><span id="__span-8-12"><span class="k">[Install]</span>
+</span><span id="__span-8-13"><span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</span></code></pre></div>
+</details>
+<div class="highlight"><pre><span></span><code><span id="__span-9-1">sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+</span><span id="__span-9-2">sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>l3-router-gre
+</span></code></pre></div>
+<h3 id="海外侧hk-vps">海外侧（HK VPS）<a class="headerlink" href="#海外侧hk-vps" title="Permanent link">¶</a></h3>
+<p>接下来在我们的 VPS 上配置好出口</p>
+<details class="plain">
+<summary><code>/etc/l3-vps.conf</code></summary>
+<div class="highlight"><pre><span></span><code><span id="__span-10-1"><span class="na">ET_LOCAL</span><span class="o">=</span><span class="s">100.100.100.11</span>
+</span><span id="__span-10-2"><span class="na">ET_REMOTE</span><span class="o">=</span><span class="s">100.100.100.2</span>
+</span><span id="__span-10-3">
+</span><span id="__span-10-4"><span class="na">GRE_LOCAL</span><span class="o">=</span><span class="s">10.200.0.1</span>
+</span><span id="__span-10-5"><span class="na">GRE_PREFIX</span><span class="o">=</span><span class="s">30</span>
+</span><span id="__span-10-6"><span class="na">GRE_MTU</span><span class="o">=</span><span class="s">1280</span>
+</span></code></pre></div>
+</details>
+<p>同样配置 IPv4 Forwarding</p>
+<details class="plain">
+<summary><code>/etc/sysctl.d/80-l3-vps.conf</code></summary>
+<div class="highlight"><pre><span></span><code><span id="__span-11-1"><span class="na">net.ipv4.ip_forward</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+</span><span id="__span-11-2"><span class="na">net.ipv4.conf.all.rp_filter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2</span>
+</span><span id="__span-11-3"><span class="na">net.ipv4.conf.default.rp_filter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2</span>
+</span></code></pre></div>
+</details>
+<div class="highlight"><pre><span></span><code><span id="__span-12-1">sudo<span class="w"> </span>sysctl<span class="w"> </span>--system
+</span></code></pre></div>
+<p>然后配有关脚本</p>
+<details class="plain">
+<summary><code>/usr/local/sbin/l3-vps-gre</code></summary>
+<div class="highlight"><pre><span></span><code><span id="__span-13-1"><span class="ch">#!/bin/sh</span>
+</span><span id="__span-13-2"><span class="nb">set</span><span class="w"> </span>-eu
+</span><span id="__span-13-3">
+</span><span id="__span-13-4">.<span class="w"> </span>/etc/l3-vps.conf
+</span><span id="__span-13-5">
+</span><span id="__span-13-6"><span class="c1"># 等待 Easytier Peer 可达</span>
+</span><span id="__span-13-7"><span class="k">until</span><span class="w"> </span>ip<span class="w"> </span>-4<span class="w"> </span>route<span class="w"> </span>get<span class="w"> </span><span class="s2">"</span><span class="nv">$ET_REMOTE</span><span class="s2">"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">"src </span><span class="nv">$ET_LOCAL</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+</span><span id="__span-13-8"><span class="w">    </span>sleep<span class="w"> </span><span class="m">1</span>
+</span><span id="__span-13-9"><span class="k">done</span>
+</span><span id="__span-13-10">
+</span><span id="__span-13-11">ip<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span>gre-router<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+</span><span id="__span-13-12"><span class="w">    </span>ip<span class="w"> </span>tunnel<span class="w"> </span>del<span class="w"> </span>gre-router
+</span><span id="__span-13-13">
+</span><span id="__span-13-14">ip<span class="w"> </span>tunnel<span class="w"> </span>add<span class="w"> </span>gre-router<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-15"><span class="w">    </span>mode<span class="w"> </span>gre<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-16"><span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ET_LOCAL</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-17"><span class="w">    </span>remote<span class="w"> </span><span class="s2">"</span><span class="nv">$ET_REMOTE</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-18"><span class="w">    </span>ttl<span class="w"> </span><span class="m">64</span>
+</span><span id="__span-13-19">
+</span><span id="__span-13-20">ip<span class="w"> </span>addr<span class="w"> </span>replace<span class="w"> </span><span class="s2">"</span><span class="nv">$GRE_LOCAL</span><span class="s2">/</span><span class="nv">$GRE_PREFIX</span><span class="s2">"</span><span class="w"> </span>dev<span class="w"> </span>gre-router
+</span><span id="__span-13-21">ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>gre-router<span class="w"> </span>mtu<span class="w"> </span><span class="s2">"</span><span class="nv">$GRE_MTU</span><span class="s2">"</span>
+</span><span id="__span-13-22">ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>gre-router<span class="w"> </span>up
+</span></code></pre></div>
+</details>
+<div class="highlight"><pre><span></span><code><span id="__span-14-1">sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/sbin/l3-vps-gre
+</span></code></pre></div>
+<p>以及相关 <code>systemd</code> 配置</p>
+<details class="plain">
+<summary><code>/etc/systemd/system/l3-vps-gre.service</code></summary>
+<div class="highlight"><pre><span></span><code><span id="__span-15-1"><span class="k">[Unit]</span>
+</span><span id="__span-15-2"><span class="na">Description</span><span class="o">=</span><span class="s">L3 GRE endpoint over EasyTier</span>
+</span><span id="__span-15-3"><span class="na">After</span><span class="o">=</span><span class="s">network-online.target</span>
+</span><span id="__span-15-4"><span class="na">Wants</span><span class="o">=</span><span class="s">network-online.target</span>
+</span><span id="__span-15-5">
+</span><span id="__span-15-6"><span class="k">[Service]</span>
+</span><span id="__span-15-7"><span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
+</span><span id="__span-15-8"><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/sbin/l3-vps-gre</span>
+</span><span id="__span-15-9"><span class="na">RemainAfterExit</span><span class="o">=</span><span class="s">yes</span>
+</span><span id="__span-15-10"><span class="na">TimeoutStartSec</span><span class="o">=</span><span class="s">0</span>
+</span><span id="__span-15-11">
+</span><span id="__span-15-12"><span class="k">[Install]</span>
+</span><span id="__span-15-13"><span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</span></code></pre></div>
+</details>
+<div class="highlight"><pre><span></span><code><span id="__span-16-1">sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+</span><span id="__span-16-2">sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>l3-vps-gre
+</span></code></pre></div>
+<p>那么我们的第一步就做好了。现在可以用 <code>ip a</code> 在两边看到这个网络接口，你也可以 <code>ping</code> 一下看看能否连上。</p>
+<p>接下来我们开始配 nftables</p>
+<h2 id="配置海外侧-nftables">配置海外侧 nftables<a class="headerlink" href="#配置海外侧-nftables" title="Permanent link">¶</a></h2>
+<p>首先在海外的 VPS 上配置好，让我们可以传输代理流量</p>
+<details class="plain">
+<summary><code>/etc/l3-vps.nft</code></summary>
+<div class="highlight"><pre><span></span><code><span id="__span-17-1"><span class="c1"># TCP MSS Clamp，不加容易出现 MTU 相关问题</span>
+</span><span id="__span-17-2"><span class="k">table</span><span class="w"> </span><span class="s">inet</span><span class="w"> </span><span class="s">l3vps_mss</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-3"><span class="w">    </span><span class="kn">chain</span><span class="w"> </span><span class="s">forward</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-4"><span class="w">        </span><span class="kn">type</span><span class="w"> </span><span class="s">filter</span><span class="w"> </span><span class="s">hook</span><span class="w"> </span><span class="s">forward</span><span class="w"> </span><span class="s">priority</span><span class="w"> </span><span class="s">mangle</span>
+</span><span id="__span-17-5"><span class="w">        </span><span class="s">policy</span><span class="w"> </span><span class="s">accept</span>
+</span><span id="__span-17-6">
+</span><span id="__span-17-7"><span class="w">        </span><span class="s">iifname</span><span class="w"> </span><span class="s">"gre-router"</span><span class="w"> </span><span class="s">\</span>
+</span><span id="__span-17-8"><span class="w">            </span><span class="s">tcp</span><span class="w"> </span><span class="s">flags</span><span class="w"> </span><span class="s">syn</span><span class="w"> </span><span class="s">\</span>
+</span><span id="__span-17-9"><span class="w">            </span><span class="s">tcp</span><span class="w"> </span><span class="s">option</span><span class="w"> </span><span class="s">maxseg</span><span class="w"> </span><span class="s">size</span><span class="w"> </span><span class="s">set</span><span class="w"> </span><span class="mi">1240</span>
+</span><span id="__span-17-10">
+</span><span id="__span-17-11"><span class="w">        </span><span class="s">oifname</span><span class="w"> </span><span class="s">"gre-router"</span><span class="w"> </span><span class="s">\</span>
+</span><span id="__span-17-12"><span class="w">            </span><span class="s">tcp</span><span class="w"> </span><span class="s">flags</span><span class="w"> </span><span class="s">syn</span><span class="w"> </span><span class="s">\</span>
+</span><span id="__span-17-13"><span class="w">            </span><span class="s">tcp</span><span class="w"> </span><span class="s">option</span><span class="w"> </span><span class="s">maxseg</span><span class="w"> </span><span class="s">size</span><span class="w"> </span><span class="s">set</span><span class="w"> </span><span class="mi">1240</span>
+</span><span id="__span-17-14"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-17-15"><span class="err">}</span>
+</span><span id="__span-17-16">
+</span><span id="__span-17-17"><span class="s">table</span><span class="w"> </span><span class="s">ip</span><span class="w"> </span><span class="s">l3vps_nat</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-18"><span class="w">    </span><span class="kn">chain</span><span class="w"> </span><span class="s">postrouting</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-19"><span class="w">        </span><span class="kn">type</span><span class="w"> </span><span class="s">nat</span><span class="w"> </span><span class="s">hook</span><span class="w"> </span><span class="s">postrouting</span><span class="w"> </span><span class="s">priority</span><span class="w"> </span><span class="s">srcnat</span>
+</span><span id="__span-17-20"><span class="w">        </span><span class="s">policy</span><span class="w"> </span><span class="s">accept</span>
+</span><span id="__span-17-21">
+</span><span id="__span-17-22"><span class="w">        </span><span class="s">ip</span><span class="w"> </span><span class="s">saddr</span><span class="w"> </span><span class="mi">10</span><span class="s">.200.0.2</span><span class="w"> </span><span class="s">\</span>
+</span><span id="__span-17-23"><span class="w">            </span><span class="s">oifname</span><span class="w"> </span><span class="s">"eth0"</span><span class="w"> </span><span class="s">\</span>
+</span><span id="__span-17-24"><span class="w">            </span><span class="s">masquerade</span>
+</span><span id="__span-17-25"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-17-26"><span class="err">}</span>
+</span></code></pre></div>
+</details>
+<p>然后是加载脚本和对应的 <code>systemd</code></p>
+<details class="plain">
+<summary><code>/usr/local/sbin/l3-vps-nft-load</code></summary>
+<div class="highlight"><pre><span></span><code><span id="__span-18-1"><span class="ch">#!/bin/sh</span>
+</span><span id="__span-18-2"><span class="nb">set</span><span class="w"> </span>-eu
+</span><span id="__span-18-3">
+</span><span id="__span-18-4">nft<span class="w"> </span>list<span class="w"> </span>table<span class="w"> </span>ip<span class="w"> </span>l3vps_mss<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+</span><span id="__span-18-5"><span class="w">    </span>nft<span class="w"> </span>delete<span class="w"> </span>table<span class="w"> </span>ip<span class="w"> </span>l3vps_mss<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-18-6">
+</span><span id="__span-18-7">nft<span class="w"> </span>list<span class="w"> </span>table<span class="w"> </span>ip<span class="w"> </span>l3vps_nat<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+</span><span id="__span-18-8"><span class="w">    </span>nft<span class="w"> </span>delete<span class="w"> </span>table<span class="w"> </span>ip<span class="w"> </span>l3vps_nat<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-18-9">
+</span><span id="__span-18-10">nft<span class="w"> </span>-f<span class="w"> </span>/etc/l3-vps.nft
+</span></code></pre></div>
+</details>
+<details class="plain">
+<summary><code>/etc/systemd/system/l3-vps-nft.service</code></summary>
+<div class="highlight"><pre><span></span><code><span id="__span-19-1"><span class="k">[Unit]</span>
+</span><span id="__span-19-2"><span class="na">Description</span><span class="o">=</span><span class="s">L3 VPS NAT</span>
+</span><span id="__span-19-3"><span class="na">After</span><span class="o">=</span><span class="s">l3-vps-gre.service nftables.service</span>
+</span><span id="__span-19-4"><span class="na">Requires</span><span class="o">=</span><span class="s">l3-vps-gre.service</span>
+</span><span id="__span-19-5">
+</span><span id="__span-19-6"><span class="k">[Service]</span>
+</span><span id="__span-19-7"><span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
+</span><span id="__span-19-8"><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/sbin/l3-vps-nft-load</span>
+</span><span id="__span-19-9"><span class="na">ExecReload</span><span class="o">=</span><span class="s">/usr/local/sbin/l3-vps-nft-load</span>
+</span><span id="__span-19-10"><span class="na">RemainAfterExit</span><span class="o">=</span><span class="s">yes</span>
+</span><span id="__span-19-11">
+</span><span id="__span-19-12"><span class="k">[Install]</span>
+</span><span id="__span-19-13"><span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</span></code></pre></div>
+</details>
+<p>然后启动他们</p>
+<div class="highlight"><pre><span></span><code><span id="__span-20-1">sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+</span><span id="__span-20-2">sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/sbin/l3-vps-nft-load
+</span><span id="__span-20-3">sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>/etc/systemd/system/l3-vps-nft
+</span></code></pre></div>
+<p>接下来可以在本机测试一下</p>
+<div class="highlight"><pre><span></span><code><span id="__span-21-1">$<span class="w"> </span>ping<span class="w"> </span><span class="m">1</span>.1.1.1<span class="w"> </span>-I<span class="w"> </span>gre-hk<span class="w"> </span>-c<span class="w"> </span><span class="m">5</span>
+</span><span id="__span-21-2">PING<span class="w"> </span><span class="m">1</span>.1.1.1<span class="w"> </span><span class="o">(</span><span class="m">1</span>.1.1.1<span class="o">)</span><span class="w"> </span>from<span class="w"> </span><span class="m">10</span>.200.0.2<span class="w"> </span>gre-hk:<span class="w"> </span><span class="m">56</span><span class="o">(</span><span class="m">84</span><span class="o">)</span><span class="w"> </span>bytes<span class="w"> </span>of<span class="w"> </span>data.
+</span><span id="__span-21-3"><span class="m">64</span><span class="w"> </span>bytes<span class="w"> </span>from<span class="w"> </span><span class="m">1</span>.1.1.1:<span class="w"> </span><span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">ttl</span><span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="nv">time</span><span class="o">=</span><span class="m">63</span>.9<span class="w"> </span>ms
+</span><span id="__span-21-4"><span class="m">64</span><span class="w"> </span>bytes<span class="w"> </span>from<span class="w"> </span><span class="m">1</span>.1.1.1:<span class="w"> </span><span class="nv">icmp_seq</span><span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="nv">ttl</span><span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="nv">time</span><span class="o">=</span><span class="m">63</span>.9<span class="w"> </span>ms
+</span><span id="__span-21-5"><span class="m">64</span><span class="w"> </span>bytes<span class="w"> </span>from<span class="w"> </span><span class="m">1</span>.1.1.1:<span class="w"> </span><span class="nv">icmp_seq</span><span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="nv">ttl</span><span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="nv">time</span><span class="o">=</span><span class="m">64</span>.0<span class="w"> </span>ms
+</span><span id="__span-21-6"><span class="m">64</span><span class="w"> </span>bytes<span class="w"> </span>from<span class="w"> </span><span class="m">1</span>.1.1.1:<span class="w"> </span><span class="nv">icmp_seq</span><span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="nv">ttl</span><span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="nv">time</span><span class="o">=</span><span class="m">64</span>.6<span class="w"> </span>ms
+</span><span id="__span-21-7"><span class="m">64</span><span class="w"> </span>bytes<span class="w"> </span>from<span class="w"> </span><span class="m">1</span>.1.1.1:<span class="w"> </span><span class="nv">icmp_seq</span><span class="o">=</span><span class="m">5</span><span class="w"> </span><span class="nv">ttl</span><span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="nv">time</span><span class="o">=</span><span class="m">64</span>.0<span class="w"> </span>ms
+</span><span id="__span-21-8">
+</span><span id="__span-21-9">---<span class="w"> </span><span class="m">1</span>.1.1.1<span class="w"> </span>ping<span class="w"> </span>statistics<span class="w"> </span>---
+</span><span id="__span-21-10"><span class="m">5</span><span class="w"> </span>packets<span class="w"> </span>transmitted,<span class="w"> </span><span class="m">5</span><span class="w"> </span>received,<span class="w"> </span><span class="m">0</span>%<span class="w"> </span>packet<span class="w"> </span>loss,<span class="w"> </span><span class="nb">time</span><span class="w"> </span>4002ms
+</span><span id="__span-21-11">rtt<span class="w"> </span>min/avg/max/mdev<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">63</span>.859/64.074/64.615/0.275<span class="w"> </span>ms
+</span></code></pre></div>
+<p>这样就是没问题了。接下来在本机进行分流</p>
+<h2 id="配置本机-nftables">配置本机 nftables<a class="headerlink" href="#配置本机-nftables" title="Permanent link">¶</a></h2>
+<p>这里我们先不管 IPv6，只按 IPv4 来进行分流。</p>
+<details class="plain">
+<summary><code>/etc/l3-router/router.nft</code></summary>
+<div class="highlight"><pre><span></span><code><span id="__span-22-1"><span class="k">table</span><span class="w"> </span><span class="s">inet</span><span class="w"> </span><span class="s">l3route</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-2"><span class="w">    </span><span class="c1"># 来自内网的地址</span>
+</span><span id="__span-22-3"><span class="w">    </span><span class="kn">set</span><span class="w"> </span><span class="s">lan_src4</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-4"><span class="w">        </span><span class="kn">type</span><span class="w"> </span><span class="s">ipv4_addr</span>
+</span><span id="__span-22-5"><span class="w">        </span><span class="s">flags</span><span class="w"> </span><span class="s">interval</span>
+</span><span id="__span-22-6"><span class="w">        </span><span class="s">auto-merge</span>
+</span><span id="__span-22-7">
+</span><span id="__span-22-8"><span class="w">        </span><span class="s">elements</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-9"><span class="w">            </span><span class="kn">10.0.0.0/8,</span>
+</span><span id="__span-22-10"><span class="w">            </span><span class="mi">100</span><span class="s">.64.0.0/10,</span>
+</span><span id="__span-22-11"><span class="w">            </span><span class="mi">172</span><span class="s">.16.0.0/12,</span>
+</span><span id="__span-22-12"><span class="w">            </span><span class="mi">192</span><span class="s">.168.0.0/16</span>
+</span><span id="__span-22-13"><span class="w">        </span><span class="err">}</span>
+</span><span id="__span-22-14"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-22-15">
+</span><span id="__span-22-16"><span class="w">    </span><span class="c1"># 不应进入 GRE 的内网地址</span>
+</span><span id="__span-22-17"><span class="w">    </span><span class="s">set</span><span class="w"> </span><span class="s">private4</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-18"><span class="w">        </span><span class="kn">type</span><span class="w"> </span><span class="s">ipv4_addr</span>
+</span><span id="__span-22-19"><span class="w">        </span><span class="s">flags</span><span class="w"> </span><span class="s">interval</span>
+</span><span id="__span-22-20"><span class="w">        </span><span class="s">auto-merge</span>
+</span><span id="__span-22-21">
+</span><span id="__span-22-22"><span class="w">        </span><span class="s">elements</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-23"><span class="w">            </span><span class="kn">0.0.0.0/8,</span>
+</span><span id="__span-22-24"><span class="w">            </span><span class="mi">10</span><span class="s">.0.0.0/8,</span>
+</span><span id="__span-22-25"><span class="w">            </span><span class="mi">100</span><span class="s">.64.0.0/10,</span>
+</span><span id="__span-22-26"><span class="w">            </span><span class="mi">127</span><span class="s">.0.0.0/8,</span>
+</span><span id="__span-22-27"><span class="w">            </span><span class="mi">169</span><span class="s">.254.0.0/16,</span>
+</span><span id="__span-22-28"><span class="w">            </span><span class="mi">172</span><span class="s">.16.0.0/12,</span>
+</span><span id="__span-22-29"><span class="w">            </span><span class="mi">192</span><span class="s">.0.0.0/24,</span>
+</span><span id="__span-22-30"><span class="w">            </span><span class="mi">192</span><span class="s">.168.0.0/16,</span>
+</span><span id="__span-22-31"><span class="w">            </span><span class="mi">198</span><span class="s">.18.0.0/15,</span>
+</span><span id="__span-22-32"><span class="w">            </span><span class="mi">224</span><span class="s">.0.0.0/4,</span>
+</span><span id="__span-22-33"><span class="w">            </span><span class="mi">240</span><span class="s">.0.0.0/4,</span>
+</span><span id="__span-22-34"><span class="w">            </span><span class="mi">100</span><span class="s">.100.100.0/24</span>
+</span><span id="__span-22-35"><span class="w">        </span><span class="err">}</span>
+</span><span id="__span-22-36"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-22-37">
+</span><span id="__span-22-38"><span class="w">    </span><span class="c1"># 中国 IP</span>
+</span><span id="__span-22-39"><span class="w">    </span><span class="s">set</span><span class="w"> </span><span class="s">cn4</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-40"><span class="w">        </span><span class="kn">type</span><span class="w"> </span><span class="s">ipv4_addr</span>
+</span><span id="__span-22-41"><span class="w">        </span><span class="s">flags</span><span class="w"> </span><span class="s">interval</span>
+</span><span id="__span-22-42"><span class="w">        </span><span class="s">auto-merge</span>
+</span><span id="__span-22-43"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-22-44">
+</span><span id="__span-22-45"><span class="w">    </span><span class="s">chain</span><span class="w"> </span><span class="s">classify</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-46"><span class="w">        </span><span class="kn">ip</span><span class="w"> </span><span class="s">daddr</span><span class="w"> </span><span class="s">@private4</span><span class="w"> </span><span class="s">return</span><span class="w"> </span><span class="c1"># 私有/特殊地址直连</span>
+</span><span id="__span-22-47">
+</span><span id="__span-22-48"><span class="w">        </span><span class="s">ip</span><span class="w"> </span><span class="s">daddr</span><span class="w"> </span><span class="s">@cn4</span><span class="w"> </span><span class="s">return</span><span class="w"> </span><span class="c1"># 中国大陆公网 IP 直连</span>
+</span><span id="__span-22-49">
+</span><span id="__span-22-50"><span class="w">        </span><span class="s">meta</span><span class="w"> </span><span class="s">mark</span><span class="w"> </span><span class="s">set</span><span class="w"> </span><span class="s">meta</span><span class="w"> </span><span class="s">mark</span><span class="w"> </span><span class="s">|</span><span class="w"> </span><span class="s">0x10000</span><span class="w"> </span><span class="c1"># 其他 IPv4 走国外 GRE</span>
+</span><span id="__span-22-51"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-22-52">
+</span><span id="__span-22-53"><span class="w">    </span><span class="s">chain</span><span class="w"> </span><span class="s">prerouting</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-54"><span class="w">        </span><span class="kn">type</span><span class="w"> </span><span class="s">filter</span><span class="w"> </span><span class="s">hook</span><span class="w"> </span><span class="s">prerouting</span><span class="w"> </span><span class="s">priority</span><span class="w"> </span><span class="s">mangle</span>
+</span><span id="__span-22-55"><span class="w">        </span><span class="s">policy</span><span class="w"> </span><span class="s">accept</span>
+</span><span id="__span-22-56">
+</span><span id="__span-22-57"><span class="w">        </span><span class="s">ip</span><span class="w"> </span><span class="s">saddr</span><span class="w"> </span><span class="s">@lan_src4</span><span class="w"> </span><span class="s">jump</span><span class="w"> </span><span class="s">classify</span>
+</span><span id="__span-22-58"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-22-59">
+</span><span id="__span-22-60"><span class="w">    </span><span class="s">chain</span><span class="w"> </span><span class="s">output</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-61"><span class="w">        </span><span class="kn">type</span><span class="w"> </span><span class="s">route</span><span class="w"> </span><span class="s">hook</span><span class="w"> </span><span class="s">output</span><span class="w"> </span><span class="s">priority</span><span class="w"> </span><span class="s">mangle</span>
+</span><span id="__span-22-62"><span class="w">        </span><span class="s">policy</span><span class="w"> </span><span class="s">accept</span>
+</span><span id="__span-22-63">
+</span><span id="__span-22-64"><span class="w">        </span><span class="s">meta</span><span class="w"> </span><span class="s">mark</span><span class="w"> </span><span class="s">&amp;</span><span class="w"> </span><span class="s">0x20000</span><span class="w"> </span><span class="s">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="s">return</span><span class="w"> </span><span class="c1"># 不应被送进 GRE 的，如 Easytier</span>
+</span><span id="__span-22-65">
+</span><span id="__span-22-66"><span class="w">        </span><span class="s">jump</span><span class="w"> </span><span class="s">classify</span>
+</span><span id="__span-22-67"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-22-68"><span class="err">}</span>
+</span><span id="__span-22-69">
+</span><span id="__span-22-70"><span class="s">table</span><span class="w"> </span><span class="s">ip</span><span class="w"> </span><span class="s">l3route_nat</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-71"><span class="w">    </span><span class="kn">chain</span><span class="w"> </span><span class="s">postrouting</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-72"><span class="w">        </span><span class="kn">type</span><span class="w"> </span><span class="s">nat</span><span class="w"> </span><span class="s">hook</span><span class="w"> </span><span class="s">postrouting</span><span class="w"> </span><span class="s">priority</span><span class="w"> </span><span class="s">srcnat</span>
+</span><span id="__span-22-73"><span class="w">        </span><span class="s">policy</span><span class="w"> </span><span class="s">accept</span>
+</span><span id="__span-22-74">
+</span><span id="__span-22-75"><span class="w">        </span><span class="s">oifname</span><span class="w"> </span><span class="s">"gre-hk"</span><span class="w"> </span><span class="s">masquerade</span>
+</span><span id="__span-22-76"><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-22-77"><span class="err">}</span>
+</span></code></pre></div>
+</details>
+<p>接下来，我们处理中国 IPv4 的分流。随便找个地方下载，比如<a href="https://github.com/fernvenue/chn-cidr-list/blob/master/ip.txt">这里</a>，然后用脚本转成 nftables 的格式，比如</p>
+<div class="highlight"><pre><span></span><code><span id="__span-23-1"><span class="ch">#!/bin/sh</span>
+</span><span id="__span-23-2"><span class="nb">set</span><span class="w"> </span>-eu
+</span><span id="__span-23-3">
+</span><span id="__span-23-4"><span class="nv">SRC</span><span class="o">=</span>/etc/l3-router/cn4.cidr
+</span><span id="__span-23-5"><span class="nv">OUT</span><span class="o">=</span>/etc/l3-router/cn4.nft
+</span><span id="__span-23-6"><span class="nv">TMP</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">OUT</span><span class="si">}</span><span class="s2">.tmp"</span>
+</span><span id="__span-23-7">
+</span><span id="__span-23-8"><span class="o">{</span>
+</span><span id="__span-23-9"><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s1">'add element inet l3route cn4 {'</span>
+</span><span id="__span-23-10"><span class="w">    </span>grep<span class="w"> </span>-F<span class="w"> </span><span class="s1">'.'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$SRC</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">'s/$/,/'</span>
+</span><span id="__span-23-11"><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s1">'}'</span>
+</span><span id="__span-23-12"><span class="o">}</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$TMP</span><span class="s2">"</span>
+</span><span id="__span-23-13">
+</span><span id="__span-23-14">mv<span class="w"> </span><span class="s2">"</span><span class="nv">$TMP</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$OUT</span><span class="s2">"</span>
+</span></code></pre></div>
+<p>（这里你可能需要替换一下 <code>SRC</code> 变量）</p>
+<p>然后我们新建加载 nftables 的脚本和对应的服务</p>
+<details class="plain">
+<summary><code>/usr/local/sbin/l3-router-nft-load</code></summary>
+<div class="highlight"><pre><span></span><code><span id="__span-24-1"><span class="ch">#!/bin/sh</span>
+</span><span id="__span-24-2"><span class="nb">set</span><span class="w"> </span>-eu
+</span><span id="__span-24-3">
+</span><span id="__span-24-4">nft<span class="w"> </span>list<span class="w"> </span>table<span class="w"> </span>inet<span class="w"> </span>l3route<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+</span><span id="__span-24-5"><span class="w">    </span>nft<span class="w"> </span>delete<span class="w"> </span>table<span class="w"> </span>inet<span class="w"> </span>l3route<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-24-6">
+</span><span id="__span-24-7">nft<span class="w"> </span>list<span class="w"> </span>table<span class="w"> </span>ip<span class="w"> </span>l3route_nat<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+</span><span id="__span-24-8"><span class="w">    </span>nft<span class="w"> </span>delete<span class="w"> </span>table<span class="w"> </span>ip<span class="w"> </span>l3route_nat<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-24-9">
+</span><span id="__span-24-10">nft<span class="w"> </span>-f<span class="w"> </span>/etc/l3-router/router.nft
+</span><span id="__span-24-11">
+</span><span id="__span-24-12"><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-s<span class="w"> </span>/etc/l3-router/cn4.nft<span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-24-13"><span class="w">    </span>nft<span class="w"> </span>-f<span class="w"> </span>/etc/l3-router/cn4.nft
+</span><span id="__span-24-14"><span class="k">fi</span>
+</span></code></pre></div>
+</details>
+<details class="plain">
+<summary><code>/etc/systemd/system/l3-router-nft.service</code></summary>
+<div class="highlight"><pre><span></span><code><span id="__span-25-1"><span class="k">[Unit]</span>
+</span><span id="__span-25-2"><span class="na">Description</span><span class="o">=</span><span class="s">L3 router nftables rules</span>
+</span><span id="__span-25-3"><span class="na">After</span><span class="o">=</span><span class="s">l3-router-gre.service nftables.service</span>
+</span><span id="__span-25-4"><span class="na">Requires</span><span class="o">=</span><span class="s">l3-router-gre.service</span>
+</span><span id="__span-25-5">
+</span><span id="__span-25-6"><span class="k">[Service]</span>
+</span><span id="__span-25-7"><span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
+</span><span id="__span-25-8"><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/sbin/l3-router-nft-load</span>
+</span><span id="__span-25-9"><span class="na">ExecReload</span><span class="o">=</span><span class="s">/usr/local/sbin/l3-router-nft-load</span>
+</span><span id="__span-25-10"><span class="na">RemainAfterExit</span><span class="o">=</span><span class="s">yes</span>
+</span><span id="__span-25-11">
+</span><span id="__span-25-12"><span class="k">[Install]</span>
+</span><span id="__span-25-13"><span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</span></code></pre></div>
+</details>
+<div class="highlight"><pre><span></span><code><span id="__span-26-1">sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+</span><span id="__span-26-2">sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>l3-router-nft
+</span></code></pre></div>
+<p>这样就完成啦。我们可以尝试一下他是不是会自动的分流，试一下 traceroute</p>
+<div class="highlight"><pre><span></span><code><span id="__span-27-1">$<span class="w"> </span>nexttrace<span class="w"> </span><span class="m">1</span>.1.1.1
+</span><span id="__span-27-2">NextTrace<span class="w"> </span>v1.7.3<span class="w"> </span><span class="m">2026</span>-08-23T16:13:15Z<span class="w"> </span>40ac803
+</span><span id="__span-27-3"><span class="o">[</span>NextTrace<span class="w"> </span>API<span class="o">]</span><span class="w"> </span>preferred<span class="w"> </span>API<span class="w"> </span>IP<span class="w"> </span>-<span class="w"> </span><span class="m">103</span>.117.102.27<span class="w"> </span>-<span class="w"> </span><span class="m">382</span>.32ms<span class="w"> </span>-<span class="w"> </span>DMIT.NRT
+</span><span id="__span-27-4">IP<span class="w"> </span>Geo<span class="w"> </span>Data<span class="w"> </span>Provider:<span class="w"> </span>NextTrace-API
+</span><span id="__span-27-5"><span class="m">172</span>.26.104.55<span class="w"> </span>-&gt;<span class="w"> </span><span class="m">1</span>.1.1.1,<span class="w"> </span><span class="m">30</span><span class="w"> </span>hops<span class="w"> </span>max,<span class="w"> </span><span class="m">28</span><span class="w"> </span>byte<span class="w"> </span>packets,<span class="w"> </span>ICMP<span class="w"> </span>mode
+</span><span id="__span-27-6"><span class="m">1</span><span class="w">   </span><span class="m">10</span>.200.0.1<span class="w">      </span>*<span class="w">                         </span>RFC1918
+</span><span id="__span-27-7"><span class="w">                                              </span><span class="m">71</span>.71<span class="w"> </span>ms<span class="w"> </span>/<span class="w"> </span><span class="m">63</span>.12<span class="w"> </span>ms<span class="w"> </span>/<span class="w"> </span><span class="m">62</span>.89<span class="w"> </span>ms
+</span><span id="__span-27-8"><span class="m">2</span><span class="w">   </span><span class="m">140</span>.150.236.1<span class="w">   </span>AS205548<span class="w">                  </span>中国<span class="w"> </span>香港<span class="w">   </span>zouter.io
+</span><span id="__span-27-9"><span class="w">                                              </span><span class="m">63</span>.89<span class="w"> </span>ms<span class="w"> </span>/<span class="w"> </span><span class="m">63</span>.66<span class="w"> </span>ms<span class="w"> </span>/<span class="w"> </span><span class="m">63</span>.47<span class="w"> </span>ms
+</span><span id="__span-27-10"><span class="m">3</span><span class="w">   </span><span class="m">10</span>.21.0.48<span class="w">      </span>*<span class="w">                         </span>RFC1918
+</span><span id="__span-27-11"><span class="w">                                              </span><span class="m">64</span>.06<span class="w"> </span>ms<span class="w"> </span>/<span class="w"> </span><span class="m">63</span>.38<span class="w"> </span>ms<span class="w"> </span>/<span class="w"> </span><span class="m">64</span>.09<span class="w"> </span>ms
+</span><span id="__span-27-12"><span class="m">4</span><span class="w">   </span><span class="m">10</span>.21.0.62<span class="w">      </span>*<span class="w">                         </span>RFC1918
+</span><span id="__span-27-13"><span class="w">                                              </span><span class="m">64</span>.19<span class="w"> </span>ms<span class="w"> </span>/<span class="w"> </span><span class="m">63</span>.42<span class="w"> </span>ms<span class="w"> </span>/<span class="w"> </span><span class="m">71</span>.51<span class="w"> </span>ms
+</span><span id="__span-27-14"><span class="m">5</span><span class="w">   </span><span class="m">36</span>.255.57.178<span class="w">   </span>*<span class="w">                         </span>中国<span class="w"> </span>香港
+</span><span id="__span-27-15"><span class="w">    </span><span class="m">49304</span>.hkg.equinix.com<span class="w">                     </span><span class="m">63</span>.72<span class="w"> </span>ms<span class="w"> </span>/<span class="w"> </span><span class="m">63</span>.58<span class="w"> </span>ms<span class="w"> </span>/<span class="w"> </span><span class="m">63</span>.62<span class="w"> </span>ms
+</span><span id="__span-27-16"><span class="m">6</span><span class="w">   </span><span class="m">36</span>.255.57.108<span class="w">   </span>AS13335<span class="w">                   </span>中国<span class="w"> </span>香港<span class="w">  </span>Equinix<span class="w"> </span>Hong<span class="w"> </span>Kong<span class="w"> </span>-<span class="w"> </span>Cloudflare<span class="w"> </span>-<span class="w"> </span>300Gbps<span class="w"> </span>cloudflare.com
+</span><span id="__span-27-17"><span class="w">    </span><span class="m">13335</span>-hk2-ix.equinix.com<span class="w">                  </span><span class="m">63</span>.90<span class="w"> </span>ms<span class="w"> </span>/<span class="w"> </span><span class="m">64</span>.07<span class="w"> </span>ms<span class="w"> </span>/<span class="w"> </span><span class="m">64</span>.12<span class="w"> </span>ms
+</span><span id="__span-27-18"><span class="m">7</span><span class="w">   </span><span class="m">103</span>.22.203.1<span class="w">    </span>AS13335<span class="w">  </span><span class="o">[</span>CLOUDFLARE-AP<span class="o">]</span><span class="w">  </span>中国<span class="w"> </span>香港<span class="w">   </span>cloudflare.com
+</span><span id="__span-27-19"><span class="w">                                              </span><span class="m">71</span>.14<span class="w"> </span>ms<span class="w"> </span>/<span class="w"> </span>*<span class="w"> </span>ms<span class="w"> </span>/<span class="w"> </span>*<span class="w"> </span>ms
+</span><span id="__span-27-20"><span class="m">8</span><span class="w">   </span><span class="m">103</span>.22.203.79<span class="w">   </span>AS13335<span class="w">  </span><span class="o">[</span>CLOUDFLARE-AP<span class="o">]</span><span class="w">  </span>中国<span class="w"> </span>香港<span class="w">   </span>cloudflare.com
+</span><span id="__span-27-21"><span class="w">                                              </span><span class="m">65</span>.25<span class="w"> </span>ms<span class="w"> </span>/<span class="w"> </span>*<span class="w"> </span>ms<span class="w"> </span>/<span class="w"> </span>*<span class="w"> </span>ms
+</span><span id="__span-27-22"><span class="m">9</span><span class="w">   </span><span class="m">1</span>.1.1.1<span class="w">         </span>AS13335<span class="w">                   </span>Anycast<span class="w">    </span>cloudflare.com
+</span><span id="__span-27-23"><span class="w">    </span>one.one.one.one<span class="w">                           </span><span class="m">64</span>.49<span class="w"> </span>ms<span class="w"> </span>/<span class="w"> </span><span class="m">63</span>.81<span class="w"> </span>ms<span class="w"> </span>/<span class="w"> </span><span class="m">64</span>.06<span class="w"> </span>ms
+</span><span id="__span-27-24">Trace<span class="w"> </span>Stopped:<span class="w"> </span>Destination<span class="w"> </span>Reached<span class="w"> </span>at<span class="w"> </span>Hop<span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="o">(</span>ICMP<span class="w"> </span>Echo<span class="w"> </span>Reply<span class="w"> </span>from<span class="w"> </span><span class="m">1</span>.1.1.1<span class="o">)</span>
+</span></code></pre></div>
+<p>可以看到这里成功的自动走我们的 VPS 了，这样就做完了</p>
+<p>吗？</p>
+<h2 id="配置-dns">配置 DNS<a class="headerlink" href="#配置-dns" title="Permanent link">¶</a></h2>
+<p>很容易我们发现出现 DNS 污染了，如果我想同时保证校内的解析的话。这里我们直接用 MosDNS 进行分流</p>
+<details class="plain">
+<summary><code>/etc/mosdns/config.yaml</code></summary>
+<div class="highlight"><pre><span></span><code><span id="__span-28-1"><span class="nt">log</span><span class="p">:</span>
+</span><span id="__span-28-2"><span class="w">  </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">info</span>
+</span><span id="__span-28-3">
+</span><span id="__span-28-4"><span class="nt">plugins</span><span class="p">:</span>
+</span><span id="__span-28-5"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geosite_cn</span>
+</span><span id="__span-28-6"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_set</span>
+</span><span id="__span-28-7"><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+</span><span id="__span-28-8"><span class="w">      </span><span class="nt">files</span><span class="p">:</span>
+</span><span id="__span-28-9"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/mosdns/rules/geosite_cn.txt</span>
+</span><span id="__span-28-10">
+</span><span id="__span-28-11"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">forward_nju</span>
+</span><span id="__span-28-12"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">forward</span>
+</span><span id="__span-28-13"><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+</span><span id="__span-28-14"><span class="w">      </span><span class="nt">concurrent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+</span><span id="__span-28-15"><span class="w">      </span><span class="nt">upstreams</span><span class="p">:</span>
+</span><span id="__span-28-16"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nju1</span>
+</span><span id="__span-28-17"><span class="w">          </span><span class="nt">addr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.28.253.4</span>
+</span><span id="__span-28-18"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nju2</span>
+</span><span id="__span-28-19"><span class="w">          </span><span class="nt">addr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.12.253.4</span>
+</span><span id="__span-28-20">
+</span><span id="__span-28-21"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">forward_cn</span>
+</span><span id="__span-28-22"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">forward</span>
+</span><span id="__span-28-23"><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+</span><span id="__span-28-24"><span class="w">      </span><span class="nt">concurrent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+</span><span id="__span-28-25"><span class="w">      </span><span class="nt">upstreams</span><span class="p">:</span>
+</span><span id="__span-28-26"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dnspod</span>
+</span><span id="__span-28-27"><span class="w">          </span><span class="nt">addr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://doh.pub/dns-query</span>
+</span><span id="__span-28-28"><span class="w">          </span><span class="nt">dial_addr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.12.12.12</span>
+</span><span id="__span-28-29">
+</span><span id="__span-28-30"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">alidns</span>
+</span><span id="__span-28-31"><span class="w">          </span><span class="nt">addr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://dns.alidns.com/dns-query</span>
+</span><span id="__span-28-32"><span class="w">          </span><span class="nt">dial_addr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">223.5.5.5</span>
+</span><span id="__span-28-33">
+</span><span id="__span-28-34"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">forward_foreign</span>
+</span><span id="__span-28-35"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">forward</span>
+</span><span id="__span-28-36"><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+</span><span id="__span-28-37"><span class="w">      </span><span class="nt">concurrent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+</span><span id="__span-28-38"><span class="w">      </span><span class="nt">upstreams</span><span class="p">:</span>
+</span><span id="__span-28-39"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cloudflare</span>
+</span><span id="__span-28-40"><span class="w">          </span><span class="nt">addr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cloudflare-dns.com/dns-query</span>
+</span><span id="__span-28-41"><span class="w">          </span><span class="nt">dial_addr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.1.1.1</span>
+</span><span id="__span-28-42">
+</span><span id="__span-28-43"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">google</span>
+</span><span id="__span-28-44"><span class="w">          </span><span class="nt">addr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://dns.google/dns-query</span>
+</span><span id="__span-28-45"><span class="w">          </span><span class="nt">dial_addr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.8.8.8</span>
+</span><span id="__span-28-46">
+</span><span id="__span-28-47"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seq_nju</span>
+</span><span id="__span-28-48"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sequence</span>
+</span><span id="__span-28-49"><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+</span><span id="__span-28-50"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">exec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$forward_nju</span>
+</span><span id="__span-28-51">
+</span><span id="__span-28-52"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seq_cn</span>
+</span><span id="__span-28-53"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sequence</span>
+</span><span id="__span-28-54"><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+</span><span id="__span-28-55"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">exec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$forward_cn</span>
+</span><span id="__span-28-56">
+</span><span id="__span-28-57"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seq_foreign</span>
+</span><span id="__span-28-58"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sequence</span>
+</span><span id="__span-28-59"><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+</span><span id="__span-28-60"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">exec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$forward_foreign</span>
+</span><span id="__span-28-61">
+</span><span id="__span-28-62"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+</span><span id="__span-28-63"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sequence</span>
+</span><span id="__span-28-64"><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+</span><span id="__span-28-65"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">matches</span><span class="p">:</span>
+</span><span id="__span-28-66"><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qtype 28</span>
+</span><span id="__span-28-67"><span class="w">        </span><span class="nt">exec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reject 0</span>
+</span><span id="__span-28-68">
+</span><span id="__span-28-69"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">exec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cache 8192</span>
+</span><span id="__span-28-70">
+</span><span id="__span-28-71"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">matches</span><span class="p">:</span>
+</span><span id="__span-28-72"><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">has_resp</span>
+</span><span id="__span-28-73"><span class="w">        </span><span class="nt">exec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">accept</span>
+</span><span id="__span-28-74">
+</span><span id="__span-28-75"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">matches</span><span class="p">:</span>
+</span><span id="__span-28-76"><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qname nju.edu.cn</span>
+</span><span id="__span-28-77"><span class="w">        </span><span class="nt">exec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">goto seq_nju</span>
+</span><span id="__span-28-78">
+</span><span id="__span-28-79"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">matches</span><span class="p">:</span>
+</span><span id="__span-28-80"><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qname $geosite_cn</span>
+</span><span id="__span-28-81"><span class="w">        </span><span class="nt">exec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">goto seq_cn</span>
+</span><span id="__span-28-82">
+</span><span id="__span-28-83"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">exec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">goto seq_foreign</span>
+</span><span id="__span-28-84">
+</span><span id="__span-28-85"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">udp_server</span>
+</span><span id="__span-28-86"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">udp_server</span>
+</span><span id="__span-28-87"><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+</span><span id="__span-28-88"><span class="w">      </span><span class="nt">entry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+</span><span id="__span-28-89"><span class="w">      </span><span class="nt">listen</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1:53</span>
+</span><span id="__span-28-90">
+</span><span id="__span-28-91"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tcp_server</span>
+</span><span id="__span-28-92"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tcp_server</span>
+</span><span id="__span-28-93"><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+</span><span id="__span-28-94"><span class="w">      </span><span class="nt">entry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+</span><span id="__span-28-95"><span class="w">      </span><span class="nt">listen</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1:53</span>
+</span></code></pre></div>
+</details>
+<p>其中，<code>/etc/mosdns/rules/geosite_cn.txt</code> 可以用 <code>v2dat</code> 转换一下得到。</p>
+<p>启动 MosDNS，然后我们配置本机和热点的 DNS 使用这个 DNS</p>
+<details class="plain" open="open">
+<summary><code>/etc/NetworkManager/dnsmasq-shared.d/mosdns.conf</code></summary>
+<div class="highlight"><pre><span></span><code><span id="__span-29-1"><span class="na">no-resolv</span>
+</span><span id="__span-29-2"><span class="na">server</span><span class="o">=</span><span class="s">127.0.0.1</span><span class="c1">#53</span>
+</span></code></pre></div>
+</details>
+<p>这样就可以正常使用啦。</p>
+<h2 id="最后">最后<a class="headerlink" href="#最后" title="Permanent link">¶</a></h2>
+<p>如果你还想继续分流的话，可以用相同的方法连接下一台 VPS，然后在 nftables 和 MosDNS 里面配好。或者，你也可以集成一个 Mihomo 进去，参考我的配置</p>
+<p>改 MosDNS 的配置，国外部分统一使用 Mihomo 提供的 DNS</p>
+<div class="highlight"><pre><span></span><code><span id="__span-30-1"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">forward_foreign</span>
+</span><span id="__span-30-2"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">forward</span>
+</span><span id="__span-30-3"><span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+</span><span id="__span-30-4"><span class="w">      </span><span class="nt">upstreams</span><span class="p">:</span>
+</span><span id="__span-30-5"><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mihomo</span>
+</span><span id="__span-30-6"><span class="w">          </span><span class="nt">addr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1:1053</span>
+</span></code></pre></div>
+<p>然后你可以参考我的 Mihomo 配置</p>
+<div class="highlight"><pre><span></span><code><span id="__span-31-1"><span class="nt">dns</span><span class="p">:</span>
+</span><span id="__span-31-2"><span class="w">  </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-31-3"><span class="w">  </span><span class="nt">listen</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1:1053</span>
+</span><span id="__span-31-4"><span class="w">  </span><span class="nt">ipv6</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</span><span id="__span-31-5"><span class="w">  </span><span class="nt">enhanced-mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fake-ip</span>
+</span><span id="__span-31-6"><span class="w">  </span><span class="nt">fake-ip-range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">198.18.0.1/16</span>
+</span><span id="__span-31-7"><span class="w">  </span><span class="c1"># 只对需要重新分流的域名使用 fake-ip</span>
+</span><span id="__span-31-8"><span class="w">  </span><span class="nt">fake-ip-filter-mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rule</span>
+</span><span id="__span-31-9"><span class="w">  </span><span class="nt">fake-ip-filter</span><span class="p">:</span>
+</span><span id="__span-31-10"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RULE-SET,claude,fake-ip</span>
+</span><span id="__span-31-11"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GEOSITE,anthropic,fake-ip</span>
+</span><span id="__span-31-12"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GEOSITE,category-ntp,fake-ip</span>
+</span><span id="__span-31-13"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GEOSITE,youtube,fake-ip</span><span class="w"> </span><span class="c1"># 单独分流 Youtube</span>
+</span><span id="__span-31-14"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GEOSITE,category-ai-!cn,fake-ip</span>
+</span><span id="__span-31-15"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GEOSITE,google,fake-ip</span>
+</span><span id="__span-31-16"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MATCH,real-ip</span>
+</span><span id="__span-31-17"><span class="w">  </span><span class="c1"># DNS 全部走 gre-hk 出口，防止 DNS 污染</span>
+</span><span id="__span-31-18"><span class="w">  </span><span class="nt">nameserver</span><span class="p">:</span>
+</span><span id="__span-31-19"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://1.1.1.1/dns-query#gre-hk</span>
+</span><span id="__span-31-20"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://8.8.8.8/dns-query#gre-hk</span>
+</span><span id="__span-31-21"><span class="w">  </span><span class="nt">proxy-server-nameserver</span><span class="p">:</span>
+</span><span id="__span-31-22"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://1.1.1.1/dns-query#gre-hk</span>
+</span><span id="__span-31-23"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://8.8.8.8/dns-query#gre-hk</span>
+</span><span id="__span-31-24"><span class="nt">tun</span><span class="p">:</span>
+</span><span id="__span-31-25"><span class="w">  </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-31-26"><span class="w">  </span><span class="nt">stack</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mixed</span>
+</span><span id="__span-31-27"><span class="w">  </span><span class="nt">auto-route</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-31-28"><span class="w">  </span><span class="nt">auto-redirect</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</span><span id="__span-31-29"><span class="w">  </span><span class="nt">auto-detect-interface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</span><span id="__span-31-30"><span class="w">  </span><span class="nt">gso</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-31-31"><span class="w">  </span><span class="nt">gso-max-size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">65536</span>
+</span><span id="__span-31-32"><span class="w">  </span><span class="c1"># 不劫持 DNS</span>
+</span><span id="__span-31-33"><span class="w">  </span><span class="nt">dns-hijack</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+</span><span id="__span-31-34"><span class="w">  </span><span class="nt">iproute2-table-index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2022</span>
+</span><span id="__span-31-35"><span class="w">  </span><span class="nt">iproute2-rule-index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9500</span>
+</span><span id="__span-31-36"><span class="w">  </span><span class="nt">route-address</span><span class="p">:</span>
+</span><span id="__span-31-37"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">198.18.0.0/16</span>
+</span><span id="__span-31-38"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">160.79.104.0/21</span><span class="w"> </span><span class="c1"># Claude 分流</span>
+</span><span id="__span-31-39"><span class="nt">proxy-providers</span><span class="p">:</span>
+</span><span id="__span-31-40"><span class="w">  </span><span class="nt">sprite</span><span class="p">:</span>
+</span><span id="__span-31-41"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span>
+</span><span id="__span-31-42"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://example.com/</span>
+</span><span id="__span-31-43"><span class="w">    </span><span class="nt">override</span><span class="p">:</span>
+</span><span id="__span-31-44"><span class="w">      </span><span class="nt">interface-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">eno1</span><span class="w"> </span><span class="c1"># 填你的主要上网网卡</span>
+</span><span id="__span-31-45"><span class="w">      </span><span class="nt">routing-mark</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">131072</span><span class="w"> </span><span class="c1"># 和 Easytier 一样不走 GRE</span>
+</span><span id="__span-31-46"><span class="w">      </span><span class="nt">ip-version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ipv4</span>
+</span></code></pre></div>
+<p>这样就可以大部分流量都直连，小部分走 Mihomo 的 fake-ip 进行分流了。</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+  <h2 id="__comments">Comments</h2>
+  <!-- Insert generated snippet here -->
+  <script src="https://giscus.app/client.js" data-repo="simonzxm/giscus" data-repo-id="R_kgDOQvtcKQ" data-category="Announcements" data-category-id="DIC_kwDOQvtcKc4C0Sa-" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async="">
+  </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    // Set palette on initial load
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate"
+        ? "transparent_dark"
+        : "light"
+
+      // Instruct Giscus to set theme
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    // Register event handlers after documented loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate"
+            ? "transparent_dark"
+            : "light"
+
+          // Instruct Giscus to change theme
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+        
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../listen-to-apple-music-lossless-on-archlinux/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Listen to Apple Music Lossless on Archlinux">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Listen to Apple Music Lossless on Archlinux
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2025-2026 XM Zheng
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand", "navigation.footer", "search.suggest", "search.highlight", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../assets/_markdown_exec_pyodide.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/busuanzi.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

@@ -98,6 +98,12 @@ details > summary + .highlight, details > summary + .tabbed-set {
   margin: -0.6rem !important;
 }
 
+details > summary > code {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
 .md-typeset .admonition.plain > .admonition-title,
 .md-typeset details.plain > summary {
   padding-left: 0.8rem;
