@@ -4,6 +4,8 @@ categories: [Linux, Web]
 slug: migrate-to-layer-3-traffic-routing
 ---
 
+# Migrate to Layer 3 traffic routing
+
 近来突然不想用应用层代理（Mihomo）了；恰逢要做计网的实验，不能一直开着这样的代理，那我便换一个方案。
 
 <!-- more -->
