@@ -352,7 +352,7 @@ WantedBy=multi-user.target
 ```bash
 sudo systemctl daemon-reload
 sudo chmod +x /usr/local/sbin/l3-vps-nft-load
-sudo systemctl enable --now /etc/systemd/system/l3-vps-nft
+sudo systemctl enable --now l3-vps-nft
 ```
 
 接下来可以在本机测试一下
@@ -558,7 +558,7 @@ Trace Stopped: Destination Reached at Hop 9 (ICMP Echo Reply from 1.1.1.1)
 
 可以看到这里成功的自动走我们的 VPS 了，这样就做完了
 
-吗？
+**吗？**
 
 ## 配置 DNS
 
