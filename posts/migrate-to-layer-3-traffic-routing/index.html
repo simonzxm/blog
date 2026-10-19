@@ -11,6 +11,8 @@
         <link rel="prev" href="../listen-to-apple-music-lossless-on-archlinux/">
       
       
+        <link rel="next" href="../using-esim-on-pc/">
+      
       
         
       
@@ -580,6 +582,36 @@
     
   
     Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/hardware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware
   
 
     
@@ -1305,7 +1337,7 @@
 <p>然后启动他们</p>
 <div class="highlight"><pre><span></span><code><span id="__span-20-1">sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
 </span><span id="__span-20-2">sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/sbin/l3-vps-nft-load
-</span><span id="__span-20-3">sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>/etc/systemd/system/l3-vps-nft
+</span><span id="__span-20-3">sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>l3-vps-nft
 </span></code></pre></div>
 <p>接下来可以在本机测试一下</p>
 <div class="highlight"><pre><span></span><code><span id="__span-21-1">$<span class="w"> </span>ping<span class="w"> </span><span class="m">1</span>.1.1.1<span class="w"> </span>-I<span class="w"> </span>gre-hk<span class="w"> </span>-c<span class="w"> </span><span class="m">5</span>
@@ -1487,7 +1519,7 @@
 </span><span id="__span-27-24">Trace<span class="w"> </span>Stopped:<span class="w"> </span>Destination<span class="w"> </span>Reached<span class="w"> </span>at<span class="w"> </span>Hop<span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="o">(</span>ICMP<span class="w"> </span>Echo<span class="w"> </span>Reply<span class="w"> </span>from<span class="w"> </span><span class="m">1</span>.1.1.1<span class="o">)</span>
 </span></code></pre></div>
 <p>可以看到这里成功的自动走我们的 VPS 了，这样就做完了</p>
-<p>吗？</p>
+<p><strong>吗？</strong></p>
 <h2 id="配置-dns">配置 DNS<a class="headerlink" href="#配置-dns" title="Permanent link">¶</a></h2>
 <p>很容易我们发现出现 DNS 污染了，如果我想同时保证校内的解析的话。这里我们直接用 MosDNS 进行分流</p>
 <details class="plain">
@@ -1749,6 +1781,22 @@
             </div>
           </a>
         
+        
+          
+          <a href="../using-esim-on-pc/" class="md-footer__link md-footer__link--next" aria-label="Next: Using eSIM on PC">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Using eSIM on PC
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
         
       </nav>
     
