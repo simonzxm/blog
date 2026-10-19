@@ -2,6 +2,7 @@
 date: 2026-10-19
 categories: [Linux, Hardware]
 slug: using-esim-on-pc
+cover: ../assets/covers/using-esim-on-pc.png
 ---
 
 # Using eSIM on PC
@@ -10,10 +11,14 @@ slug: using-esim-on-pc
 
 最近突然发现了一个项目 [VoCat](https://github.com/MengMengCode/VoCat)，他可以在电脑上插卡接短信，不过需要有一个 4G 模块。所以我就火速购入了一个移动热点（俗称高通 410 棒子）和一张小白卡（eUICC），给这个棒子刷了 OpenStick v1 Debian 11，然后直接在棒子上装 VoCat 就可以爽用了（
 
+<!-- more -->
+
 感谢 Cursor Grok 4.7 帮我完成了几乎所有操作，他浪费了我大量时间（x
 
 !!! info
     我这里的型号是 ufi001c，如果型号不一样，那么以下内容可能未必能用
+
+![](../assets/posts/using-esim-on-pc/sms.png)
 
 ## 刷机
 
@@ -63,6 +68,8 @@ earlycon root=PARTUUID=a7ab80e8-e9d1-e8cd-f157-93f69b1d141e console=ttyMSM0,1152
    将其写为一个开机 oneshot 服务。执行后通过 `qmicli --uim-get-card-status` 查看，卡状态会顺利变为 `present`，串口执行 `AT+CPIN?` 也会返回 `READY`。
 
 最后直接运行 VoCat 的官方脚本安装即可，访问棒子的 `:7575` 端口就可以看到 WebUI 了。
+
+![](../assets/posts/using-esim-on-pc/vocat.png)
 
 ## 主机网络处理
 
